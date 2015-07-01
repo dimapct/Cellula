@@ -1,0 +1,6 @@
+C:\Users\dimapct\documents\visual studio 2013\Projects\TypeScriptHTMLApp1\TypeScriptHTMLApp1\bin\TypeScriptHTMLApp1.dll.config
+C:\Users\dimapct\documents\visual studio 2013\Projects\TypeScriptHTMLApp1\TypeScriptHTMLApp1\bin\TypeScriptHTMLApp1.dll
+C:\Users\dimapct\documents\visual studio 2013\Projects\TypeScriptHTMLApp1\TypeScriptHTMLApp1\bin\TypeScriptHTMLApp1.pdb
+C:\Users\dimapct\documents\visual studio 2013\Projects\TypeScriptHTMLApp1\TypeScriptHTMLApp1\obj\Debug\TypeScriptHTMLApp1.dll
+C:\Users\dimapct\documents\visual studio 2013\Projects\TypeScriptHTMLApp1\TypeScriptHTMLApp1\obj\Debug\TypeScriptHTMLApp1.pdb
+C:\Users\dimapct\documents\visual studio 2013\Projects\TypeScriptHTMLApp1\TypeScriptHTMLApp1\obj\Debug\TypeScriptHTMLApp1.csprojResolveAssemblyReference.cache
