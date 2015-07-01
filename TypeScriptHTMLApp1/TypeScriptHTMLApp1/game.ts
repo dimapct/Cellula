@@ -15,8 +15,8 @@
         console.log("Game run start");
         this.mechanicEngine.createStartCells();
         createjs.Ticker.interval = 16;
-        //createjs.Ticker.addEventListener("tick", function () { console.log("piikikikikiki"); });
-        setInterval(function () { console.log("piikikikikiki"); }, 33)
+        createjs.Ticker.addEventListener("tick", this.update);
+        //setInterval(function () { this.update(); }, 33)
         console.log("Game run end");
     }
 
