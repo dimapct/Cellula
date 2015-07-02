@@ -75,7 +75,6 @@ var BaseCell = (function () {
         configurable: true
     });
     BaseCell.prototype.update = function (t) {
-        console.log(343434);
         this.move(t);
     };
     BaseCell.prototype.move = function (t) {

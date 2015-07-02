@@ -49,5 +49,7 @@ class Rect {
     set center(value: Point) {
         this.center.x = value.x;
         this.center.y = value.y;
+        this.x = value.x - this.width / 2;
+        this.y = value.y - this.height / 2;
     }
 }

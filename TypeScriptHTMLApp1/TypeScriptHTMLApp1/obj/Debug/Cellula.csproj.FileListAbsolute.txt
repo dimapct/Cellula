@@ -4,3 +4,9 @@ C:\Users\dimapct\documents\visual studio 2013\Projects\TypeScriptHTMLApp1\TypeSc
 C:\Users\dimapct\documents\visual studio 2013\Projects\TypeScriptHTMLApp1\TypeScriptHTMLApp1\obj\Debug\Cellula.csprojResolveAssemblyReference.cache
 C:\Users\dimapct\documents\visual studio 2013\Projects\TypeScriptHTMLApp1\TypeScriptHTMLApp1\obj\Debug\Cellula.dll
 C:\Users\dimapct\documents\visual studio 2013\Projects\TypeScriptHTMLApp1\TypeScriptHTMLApp1\obj\Debug\Cellula.pdb
+W:\Repos\Cellula\TypeScriptHTMLApp1\TypeScriptHTMLApp1\bin\Cellula.dll.config
+W:\Repos\Cellula\TypeScriptHTMLApp1\TypeScriptHTMLApp1\bin\Cellula.dll
+W:\Repos\Cellula\TypeScriptHTMLApp1\TypeScriptHTMLApp1\bin\Cellula.pdb
+W:\Repos\Cellula\TypeScriptHTMLApp1\TypeScriptHTMLApp1\obj\Debug\Cellula.csprojResolveAssemblyReference.cache
+W:\Repos\Cellula\TypeScriptHTMLApp1\TypeScriptHTMLApp1\obj\Debug\Cellula.dll
+W:\Repos\Cellula\TypeScriptHTMLApp1\TypeScriptHTMLApp1\obj\Debug\Cellula.pdb

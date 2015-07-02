@@ -34,6 +34,8 @@ var Rect = (function () {
         set: function (value) {
             this.center.x = value.x;
             this.center.y = value.y;
+            this.x = value.x - this.width / 2;
+            this.y = value.y - this.height / 2;
         },
         enumerable: true,
         configurable: true

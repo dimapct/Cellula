@@ -61,7 +61,6 @@
     }
 
     update(t: number) {
-        console.log(343434)
         this.move(t);
     }
 
