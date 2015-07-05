@@ -10,3 +10,9 @@ W:\Repos\Cellula\TypeScriptHTMLApp1\TypeScriptHTMLApp1\bin\Cellula.pdb
 W:\Repos\Cellula\TypeScriptHTMLApp1\TypeScriptHTMLApp1\obj\Debug\Cellula.csprojResolveAssemblyReference.cache
 W:\Repos\Cellula\TypeScriptHTMLApp1\TypeScriptHTMLApp1\obj\Debug\Cellula.dll
 W:\Repos\Cellula\TypeScriptHTMLApp1\TypeScriptHTMLApp1\obj\Debug\Cellula.pdb
+D:\programming\Cellula\TypeScriptHTMLApp1\TypeScriptHTMLApp1\bin\Cellula.dll.config
+D:\programming\Cellula\TypeScriptHTMLApp1\TypeScriptHTMLApp1\bin\Cellula.dll
+D:\programming\Cellula\TypeScriptHTMLApp1\TypeScriptHTMLApp1\bin\Cellula.pdb
+D:\programming\Cellula\TypeScriptHTMLApp1\TypeScriptHTMLApp1\obj\Debug\Cellula.csprojResolveAssemblyReference.cache
+D:\programming\Cellula\TypeScriptHTMLApp1\TypeScriptHTMLApp1\obj\Debug\Cellula.dll
+D:\programming\Cellula\TypeScriptHTMLApp1\TypeScriptHTMLApp1\obj\Debug\Cellula.pdb

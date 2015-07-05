@@ -42,6 +42,15 @@ var GameObjectFactory = (function () {
             //cell.image.cache(-data.width / 2, -data.height / 2, data.width, data.height);
             return cell;
         };
+        this.builders[FoodTypes.GLUCOSE] = function (data) {
+            var food = new Food(data);
+            var shape = new createjs.Shape();
+            var color = "lightyellow";
+            var radius = food.energy / 10;
+            shape.graphics.beginFill(color).drawCircle(0, 0, radius);
+            food.image.addChild(shape);
+            return food;
+        };
     };
     return GameObjectFactory;
 })();

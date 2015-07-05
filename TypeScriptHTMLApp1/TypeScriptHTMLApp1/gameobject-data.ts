@@ -21,3 +21,9 @@ class energyData {
     position = new Point(400, 100);
     speed = 2;
 }
+
+class glucoseData {
+    gameType = "glucose";
+    energy = 100;
+    position = new Point(500, 500);
+}

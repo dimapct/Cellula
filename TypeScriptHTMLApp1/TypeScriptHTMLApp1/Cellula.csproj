@@ -25,7 +25,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="application.ts" />
     <TypeScriptCompile Include="cell.ts" />
-    <TypeScriptCompile Include="cell-data.ts" />
+    <TypeScriptCompile Include="food.ts" />
+    <TypeScriptCompile Include="gameobject-data.ts" />
     <TypeScriptCompile Include="constants.ts" />
     <TypeScriptCompile Include="gameobject-factory.ts" />
     <TypeScriptCompile Include="graphics-engine.ts" />

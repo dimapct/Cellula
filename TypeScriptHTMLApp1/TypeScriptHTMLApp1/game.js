@@ -7,7 +7,7 @@ var Game = (function () {
             var deltaTime = (now - _this.lastUpdateTime) / 1000;
             _this.lastUpdateTime = now;
             _this.mechanicEngine.update(deltaTime);
-            _this.graphicsEngine.render(_this.mechanicEngine.cells, fps);
+            _this.graphicsEngine.render(_this.mechanicEngine.gameObjects, fps);
         };
         this.mechanicEngine = new MechanicEngine();
         this.graphicsEngine = new GraphicsEngine();

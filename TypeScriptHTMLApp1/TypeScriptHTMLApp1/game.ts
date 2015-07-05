@@ -21,6 +21,6 @@
         var deltaTime = (now - this.lastUpdateTime) / 1000;
         this.lastUpdateTime = now;
         this.mechanicEngine.update(deltaTime);
-        this.graphicsEngine.render(this.mechanicEngine.cells, fps);
+        this.graphicsEngine.render(this.mechanicEngine.gameObjects, fps);
     }
 } 

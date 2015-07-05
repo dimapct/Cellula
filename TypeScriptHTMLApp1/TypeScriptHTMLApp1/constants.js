@@ -5,4 +5,9 @@ var CellTypes;
     CellTypes[CellTypes["POISON"] = 2] = "POISON";
 })(CellTypes || (CellTypes = {}));
 ;
+var FoodTypes;
+(function (FoodTypes) {
+    FoodTypes[FoodTypes["GLUCOSE"] = 0] = "GLUCOSE";
+})(FoodTypes || (FoodTypes = {}));
+;
 //# sourceMappingURL=constants.js.map
