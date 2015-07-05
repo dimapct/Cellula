@@ -14,7 +14,8 @@ var Game = (function () {
         this.lastUpdateTime = 0;
     }
     Game.prototype.run = function () {
-        this.mechanicEngine.createStartCells();
+        console.log("Start game run");
+        this.mechanicEngine.createStartObjects();
         createjs.Ticker.interval = 16;
         createjs.Ticker.addEventListener("tick", this.update);
     };

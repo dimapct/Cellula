@@ -29,6 +29,7 @@
     <TypeScriptCompile Include="gameobject-data.ts" />
     <TypeScriptCompile Include="constants.ts" />
     <TypeScriptCompile Include="gameobject-factory.ts" />
+    <TypeScriptCompile Include="game-object.ts" />
     <TypeScriptCompile Include="graphics-engine.ts" />
     <TypeScriptCompile Include="lib\createjs-lib.d.ts" />
     <TypeScriptCompile Include="lib\easeljs.d.ts" />

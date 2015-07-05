@@ -1,2 +1,1 @@
-﻿enum CellTypes { BASE, ENERGY, POISON };
-enum FoodTypes { GLUCOSE };
+﻿enum GameObjectTypes { BASE, ENERGY, POISON, GLUCOSE };

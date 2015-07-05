@@ -25,5 +25,7 @@ class energyData {
 class glucoseData {
     gameType = "glucose";
     energy = 100;
+    width = 10;
+    height = 10;
     position = new Point(500, 500);
 }

@@ -1,15 +1,7 @@
-﻿class Food {
-    gameType: string;
+﻿class Food extends GameObject {
     energy: number;
-    image: any;
-    position: Point;
-    constructor(data) {
-        this.gameType = data.gameType;
+    constructor(data: any) {
+        super(data);
         this.energy = data.energy;
-        this.position = data.position;
-        this.image = new createjs.Container();
-    }
-
-    update(t) {
     }
 } 

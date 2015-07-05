@@ -7,7 +7,7 @@ var GameObjectFactory = (function () {
         return this.builders[objectType](data);
     };
     GameObjectFactory.prototype.generateBuilders = function () {
-        this.builders[CellTypes.BASE] = function (data) {
+        this.builders[GameObjectTypes.BASE] = function (data) {
             var cell = new BaseCell(data);
             var shape = new createjs.Shape();
             var color = "green";
@@ -17,7 +17,7 @@ var GameObjectFactory = (function () {
             //cell.image.cache(-data.width / 2, -data.height / 2, data.width, data.height);
             return cell;
         };
-        this.builders[CellTypes.ENERGY] = function (data) {
+        this.builders[GameObjectTypes.ENERGY] = function (data) {
             var cell = new EnergyCell(data);
             var shape = new createjs.Shape();
             var color = "darkorange";
@@ -27,7 +27,7 @@ var GameObjectFactory = (function () {
             //cell.image.cache(-data.width / 2, -data.height / 2, data.width, data.height);
             return cell;
         };
-        this.builders[CellTypes.POISON] = function (data) {
+        this.builders[GameObjectTypes.POISON] = function (data) {
             var cell = new BaseCell(data);
             var shape = new createjs.Shape();
             var color = "purple";
@@ -42,11 +42,11 @@ var GameObjectFactory = (function () {
             //cell.image.cache(-data.width / 2, -data.height / 2, data.width, data.height);
             return cell;
         };
-        this.builders[FoodTypes.GLUCOSE] = function (data) {
+        this.builders[GameObjectTypes.GLUCOSE] = function (data) {
             var food = new Food(data);
             var shape = new createjs.Shape();
-            var color = "lightyellow";
-            var radius = food.energy / 10;
+            var color = "red";
+            var radius = data.width;
             shape.graphics.beginFill(color).drawCircle(0, 0, radius);
             food.image.addChild(shape);
             return food;
