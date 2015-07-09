@@ -1,17 +1,14 @@
 var MechanicEngine = (function () {
     function MechanicEngine() {
-        this.gameObjectFactory = new GameObjectFactory();
+        this.cellFactory = new CellFactory();
         this.gameObjects = [];
     }
     MechanicEngine.prototype.createStartObjects = function () {
-        var cell1 = this.gameObjectFactory.createGameObject(GameObjectTypes.POISON, new poisonData());
-        var cell2 = this.gameObjectFactory.createGameObject(GameObjectTypes.BASE, new baseData());
-        var cell3 = this.gameObjectFactory.createGameObject(GameObjectTypes.ENERGY, new energyData());
-        var food1 = this.gameObjectFactory.createGameObject(GameObjectTypes.GLUCOSE, new glucoseData());
-        this.gameObjects.push(cell1);
-        this.gameObjects.push(cell2);
-        this.gameObjects.push(cell3);
-        this.gameObjects.push(food1);
+        var cell1 = this.cellFactory.createCell(CellTypes.MUSCLE, new muscleData());
+        var bData = new beingData();
+        bData.cells.push(cell1);
+        var being = new Being(bData);
+        this.gameObjects.push(being);
     };
     MechanicEngine.prototype.update = function (t) {
         this.gameObjects.forEach(function (obj) {

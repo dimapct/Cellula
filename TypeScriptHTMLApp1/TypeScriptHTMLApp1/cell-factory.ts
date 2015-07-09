@@ -1,30 +1,30 @@
-﻿class GameObjectFactory {
+﻿class CellFactory {
     builders: any[];
+    cellSize: number;
 
     constructor() {
         this.builders = [];
+        this.cellSize = 20;
         this.generateBuilders();
     }
 
-    createGameObject(objectType, data) {
-        return this.builders[objectType](data);
+    createCell(cellType, data) {
+        return this.builders[cellType](data);
     }
-
     
     generateBuilders() {
-        this.builders[GameObjectTypes.BASE] = function (data: any) {
-            var cell = new BaseCell(data);
-            var shape = new createjs.Shape();
-            var color = "green";
-            var radius = data.width / 2;
-            shape.graphics.beginFill(color).drawCircle(0, 0, radius);
-            cell.image.addChild(shape);
-            
-            //cell.image.cache(-data.width / 2, -data.height / 2, data.width, data.height);
+        var self = this;
+        this.builders[CellTypes.MUSCLE] = function (data: any) {
+            var cell = new MuscleCell(data);
+            cell.image = new createjs.Shape();
+            var color = "darkred";
+            cell.image.graphics.beginStroke("black").beginFill(color).drawRect(0, 0, self.cellSize, self.cellSize);
+            //cell.image.x = data.position.x;
+            //cell.image.y = data.position.y;
             return cell;
         };
 
-        this.builders[GameObjectTypes.ENERGY] = function (data: any) {
+        this.builders[CellTypes.ENERGY] = function (data: any) {
             var cell = new EnergyCell(data);
             var shape = new createjs.Shape();
             var color = "darkorange";
@@ -35,7 +35,7 @@
             return cell;
         };
 
-        this.builders[GameObjectTypes.POISON] = function (data: any) {
+        this.builders[CellTypes.POISON] = function (data: any) {
             var cell = new BaseCell(data);
             var shape = new createjs.Shape();
             var color = "purple";
@@ -50,18 +50,6 @@
             
             //cell.image.cache(-data.width / 2, -data.height / 2, data.width, data.height);
             return cell;
-        }
-
-        this.builders[GameObjectTypes.GLUCOSE] = function (data: any) {
-            var food = new Food(data);
-            var shape = new createjs.Shape();
-            var color = "red";
-            var radius = data.width;
-
-            shape.graphics.beginFill(color).drawCircle(0, 0, radius);
-            food.image.addChild(shape);
-
-            return food;
         }
     }
 } 

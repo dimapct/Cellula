@@ -24,11 +24,12 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="application.ts" />
+    <TypeScriptCompile Include="being.ts" />
     <TypeScriptCompile Include="cell.ts" />
     <TypeScriptCompile Include="food.ts" />
     <TypeScriptCompile Include="gameobject-data.ts" />
     <TypeScriptCompile Include="constants.ts" />
-    <TypeScriptCompile Include="gameobject-factory.ts" />
+    <TypeScriptCompile Include="cell-factory.ts" />
     <TypeScriptCompile Include="game-object.ts" />
     <TypeScriptCompile Include="graphics-engine.ts" />
     <TypeScriptCompile Include="lib\createjs-lib.d.ts" />

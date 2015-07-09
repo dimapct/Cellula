@@ -4,21 +4,30 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-var BaseCell = (function (_super) {
-    __extends(BaseCell, _super);
+var BaseCell = (function () {
     function BaseCell(data) {
-        _super.call(this, data);
     }
-    BaseCell.prototype.move = function (t) {
-        this.gameRect.center = new Point(this.gameRect.center.x + this.speed * t * this.dir.x, this.gameRect.center.y + this.speed * t * this.dir.y);
-    };
     return BaseCell;
-})(GameObject);
+})();
 var EnergyCell = (function (_super) {
     __extends(EnergyCell, _super);
     function EnergyCell(data) {
         _super.call(this, data);
     }
     return EnergyCell;
+})(BaseCell);
+var MuscleCell = (function (_super) {
+    __extends(MuscleCell, _super);
+    function MuscleCell(data) {
+        _super.call(this, data);
+    }
+    return MuscleCell;
+})(BaseCell);
+var PoisonCell = (function (_super) {
+    __extends(PoisonCell, _super);
+    function PoisonCell(data) {
+        _super.call(this, data);
+    }
+    return PoisonCell;
 })(BaseCell);
 //# sourceMappingURL=cell.js.map

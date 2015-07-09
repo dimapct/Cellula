@@ -1,9 +1,8 @@
-var GameObjectTypes;
-(function (GameObjectTypes) {
-    GameObjectTypes[GameObjectTypes["BASE"] = 0] = "BASE";
-    GameObjectTypes[GameObjectTypes["ENERGY"] = 1] = "ENERGY";
-    GameObjectTypes[GameObjectTypes["POISON"] = 2] = "POISON";
-    GameObjectTypes[GameObjectTypes["GLUCOSE"] = 3] = "GLUCOSE";
-})(GameObjectTypes || (GameObjectTypes = {}));
+var CellTypes;
+(function (CellTypes) {
+    CellTypes[CellTypes["MUSCLE"] = 0] = "MUSCLE";
+    CellTypes[CellTypes["ENERGY"] = 1] = "ENERGY";
+    CellTypes[CellTypes["POISON"] = 2] = "POISON";
+})(CellTypes || (CellTypes = {}));
 ;
 //# sourceMappingURL=constants.js.map

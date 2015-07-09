@@ -1,31 +1,17 @@
-﻿class baseData {
-    gameType = "base";
-    width = 20;
-    height = 20;
-    position = new Point(300, 50);
-    speed = 4;
+﻿class muscleData {
+    gameType = "MuscleCell";
 }
 
 class poisonData {
-    gameType = "poison";
-    width = 40;
-    height = 40;
-    position = new Point(100, 300);
-    speed = 3;
+    gameType = "PoisonCell";
 }
 
 class energyData {
-    gameType = "energy";
-    width = 30;
-    height = 30;
-    position = new Point(400, 100);
-    speed = 2;
+    gameType = "EnergyCell";
 }
 
-class glucoseData {
-    gameType = "glucose";
-    energy = 100;
-    width = 10;
-    height = 10;
-    position = new Point(500, 500);
+class beingData {
+    gameType = "being1";
+    cells = [];
+    position = new Point(200, 200);
 }
