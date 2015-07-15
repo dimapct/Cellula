@@ -1,8 +1,17 @@
+var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
 var Vector = (function () {
     function Vector(x, y) {
         this.x = x;
         this.y = y;
     }
+    Vector.fromPoints = function (p1, p2) {
+        return new Vector(p2.x - p1.x, p2.y - p1.y);
+    };
     Vector.prototype.calculateUnitVector = function () {
         var magnitude = Math.sqrt((this.x * this.x) + (this.y * this.y));
         return new Vector(this.x / magnitude, this.y / magnitude);
@@ -22,12 +31,10 @@ var Point = (function () {
     }
     return Point;
 })();
-var Rect = (function () {
+var Rect = (function (_super) {
+    __extends(Rect, _super);
     function Rect(x, y, w, h) {
-        this.x = x;
-        this.y = y;
-        this.width = w;
-        this.height = h;
+        _super.call(this, x, y, w, h);
     }
     Object.defineProperty(Rect.prototype, "center", {
         get: function () { return new Point(this.x + this.width / 2, this.y + this.height / 2); },
@@ -41,5 +48,5 @@ var Rect = (function () {
         configurable: true
     });
     return Rect;
-})();
+})(createjs.Rectangle);
 //# sourceMappingURL=utils.js.map

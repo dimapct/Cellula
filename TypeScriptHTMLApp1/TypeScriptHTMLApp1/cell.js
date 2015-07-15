@@ -30,4 +30,11 @@ var PoisonCell = (function (_super) {
     }
     return PoisonCell;
 })(BaseCell);
+var CoreCell = (function (_super) {
+    __extends(CoreCell, _super);
+    function CoreCell(data) {
+        _super.call(this, data);
+    }
+    return CoreCell;
+})(BaseCell);
 //# sourceMappingURL=cell.js.map

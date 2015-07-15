@@ -6,11 +6,17 @@ var Game = (function () {
             var now = createjs.Ticker.getTime();
             var deltaTime = (now - _this.lastUpdateTime) / 1000;
             _this.lastUpdateTime = now;
-            _this.mechanicEngine.update(deltaTime);
+            var clientInput = _this.controlsManager.latestRightMouseClick;
+            _this.mechanicEngine.update(deltaTime, clientInput);
             _this.graphicsEngine.render(_this.mechanicEngine.gameObjects, fps);
         };
         this.mechanicEngine = new MechanicEngine();
-        this.graphicsEngine = new GraphicsEngine();
+        var canvas = document.getElementById("gameCanvas");
+        //canvas.style = "border:40px inset blue;"
+        canvas.width = $(window).width() - 200;
+        canvas.height = $(window).height() - 200;
+        this.graphicsEngine = new GraphicsEngine(canvas, this.mechanicEngine.player);
+        this.controlsManager = new ControlsManager();
         this.lastUpdateTime = 0;
     }
     Game.prototype.run = function () {

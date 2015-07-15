@@ -1,19 +1,23 @@
 var MechanicEngine = (function () {
     function MechanicEngine() {
-        this.cellFactory = new CellFactory();
+        this.beingFactory = new BeingFactory();
         this.gameObjects = [];
+        this.player = this.beingFactory.createBeing(BeingTypes.PLAYER, new playerData());
+        var npc = this.beingFactory.createBeing(BeingTypes.NPC, new npcData());
+        this.gameObjects.push(npc);
     }
     MechanicEngine.prototype.createStartObjects = function () {
-        var cell1 = this.cellFactory.createCell(CellTypes.MUSCLE, new muscleData());
-        var bData = new beingData();
-        bData.cells.push(cell1);
-        var being = new Being(bData);
-        this.gameObjects.push(being);
+        this.gameObjects.push(this.player);
     };
-    MechanicEngine.prototype.update = function (t) {
+    MechanicEngine.prototype.update = function (t, clientEventData) {
         this.gameObjects.forEach(function (obj) {
             obj.update(t);
         });
+        if (clientEventData &&
+            (clientEventData.x !== this.player.moveTarget.x || clientEventData.y !== this.player.moveTarget.y) &&
+            (clientEventData.x !== this.player.lastMoveTarget.x || clientEventData.y !== this.player.lastMoveTarget.y)) {
+            this.player.moveTarget = clientEventData;
+        }
     };
     return MechanicEngine;
 })();

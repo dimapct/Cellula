@@ -4,6 +4,7 @@
     dir: Vector;
     speed: number;
     image: any;
+    
 
     constructor(data: any) {
         this.gameType = data.gameType;
@@ -12,12 +13,15 @@
         this.dir = data.dir || new Vector(0, 1);
         this.speed = data.speed || 0;
         this.image = new createjs.Container();
+        
     }
 
     update(t: number) {
         this.move(t);
     }
 
-    move(t: number) { }
+    move(t: number) {
+
+    }
 
 } 

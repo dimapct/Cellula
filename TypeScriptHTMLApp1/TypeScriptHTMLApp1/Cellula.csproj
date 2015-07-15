@@ -20,25 +20,30 @@
   <ItemGroup>
     <Content Include="lib\easeljs-0.8.0.min.js" />
     <Content Include="index.html" />
+    <Content Include="lib\jquery-2.1.3.min.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="application.ts" />
+    <TypeScriptCompile Include="factories\being-factory.ts" />
     <TypeScriptCompile Include="being.ts" />
     <TypeScriptCompile Include="cell.ts" />
+    <TypeScriptCompile Include="controls-manager.ts" />
     <TypeScriptCompile Include="food.ts" />
     <TypeScriptCompile Include="gameobject-data.ts" />
     <TypeScriptCompile Include="constants.ts" />
-    <TypeScriptCompile Include="cell-factory.ts" />
+    <TypeScriptCompile Include="factories\cell-factory.ts" />
     <TypeScriptCompile Include="game-object.ts" />
     <TypeScriptCompile Include="graphics-engine.ts" />
     <TypeScriptCompile Include="lib\createjs-lib.d.ts" />
     <TypeScriptCompile Include="lib\easeljs.d.ts" />
     <TypeScriptCompile Include="game.ts" />
+    <TypeScriptCompile Include="lib\jquery.d.ts" />
     <TypeScriptCompile Include="lib\tweenjs.d.ts" />
     <TypeScriptCompile Include="map.ts" />
     <TypeScriptCompile Include="mechanic-engine.ts" />
     <TypeScriptCompile Include="menu.ts" />
+    <TypeScriptCompile Include="npc.ts" />
     <TypeScriptCompile Include="utils.ts" />
   </ItemGroup>
   <ItemGroup>

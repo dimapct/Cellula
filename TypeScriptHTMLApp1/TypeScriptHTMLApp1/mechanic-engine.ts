@@ -1,19 +1,30 @@
 ﻿class MechanicEngine {
-    cellFactory: any = new CellFactory();
+    beingFactory: any = new BeingFactory();
     gameObjects: any[] = [];
+    player: PlayerBeing;
 
-    createStartObjects() {
-        var cell1 = this.cellFactory.createCell(CellTypes.MUSCLE, new muscleData());
-        var bData = new beingData();
-        bData.cells.push(cell1);
-        var being = new Being(bData);
-        this.gameObjects.push(being);
+    constructor() {
+        this.player = this.beingFactory.createBeing(BeingTypes.PLAYER, new playerData());
+        var npc = this.beingFactory.createBeing(BeingTypes.NPC, new npcData());
+        this.gameObjects.push(npc);
     }
 
-    update(t) {
+    createStartObjects() {
+        this.gameObjects.push(this.player);
+    }
+
+    update(t: number, clientEventData: Point) {
         this.gameObjects.forEach(function (obj) {
             obj.update(t);
         });
+
+        if (clientEventData &&
+            (clientEventData.x !== this.player.moveTarget.x || clientEventData.y !== this.player.moveTarget.y) &&
+            (clientEventData.x !== this.player.lastMoveTarget.x || clientEventData.y !== this.player.lastMoveTarget.y)) {
+            this.player.moveTarget = clientEventData;
+        }
+            
+        
 
     }
 }
