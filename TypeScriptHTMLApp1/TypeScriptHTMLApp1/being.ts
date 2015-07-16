@@ -31,8 +31,9 @@
         });
     }
 
-    update(t: number) {
+    update(t: number, clientEventData) {
         this.move(t);
+        this.rotate(clientEventData.rotationInputs);
     }
 
     move(t: number) {
@@ -73,6 +74,7 @@
         this.moveTarget = new Point(-1, -1);
     }
    
+    rotate(rotationInputs) { }
 
 } 
 

@@ -4,7 +4,7 @@
     dir: Vector;
     speed: number;
     image: any;
-    
+    rotationSpeed: number;
 
     constructor(data: any) {
         this.gameType = data.gameType;
@@ -13,15 +13,10 @@
         this.dir = data.dir || new Vector(0, 1);
         this.speed = data.speed || 0;
         this.image = new createjs.Container();
-        
+        this.rotationSpeed = data.rotationSpeed || 0;
     }
 
-    update(t: number) {
-        this.move(t);
-    }
 
-    move(t: number) {
-
-    }
+ 
 
 } 

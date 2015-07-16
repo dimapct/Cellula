@@ -11,7 +11,7 @@ var MechanicEngine = (function () {
     };
     MechanicEngine.prototype.update = function (t, clientEventData) {
         this.gameObjects.forEach(function (obj) {
-            obj.update(t);
+            obj.update(t, clientEventData);
         });
         if (clientEventData &&
             (clientEventData.x !== this.player.moveTarget.x || clientEventData.y !== this.player.moveTarget.y) &&

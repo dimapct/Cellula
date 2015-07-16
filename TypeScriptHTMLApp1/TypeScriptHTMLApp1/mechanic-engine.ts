@@ -15,7 +15,7 @@
 
     update(t: number, clientEventData: Point) {
         this.gameObjects.forEach(function (obj) {
-            obj.update(t);
+            obj.update(t, clientEventData);
         });
 
         if (clientEventData &&
