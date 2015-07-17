@@ -6,7 +6,7 @@ var Game = (function () {
             var now = createjs.Ticker.getTime();
             var deltaTime = (now - _this.lastUpdateTime) / 1000;
             _this.lastUpdateTime = now;
-            var clientInput = _this.controlsManager.latestRightMouseClick;
+            var clientInput = _this.controlsManager.reportInputs();
             _this.mechanicEngine.update(deltaTime, clientInput);
             _this.graphicsEngine.render(_this.mechanicEngine.gameObjects, fps);
         };

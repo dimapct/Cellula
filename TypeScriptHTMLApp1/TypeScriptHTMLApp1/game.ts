@@ -28,7 +28,7 @@
         var deltaTime = (now - this.lastUpdateTime) / 1000;
         this.lastUpdateTime = now;
 
-        var clientInput = this.controlsManager.latestRightMouseClick;
+        var clientInput = this.controlsManager.reportInputs();
         this.mechanicEngine.update(deltaTime, clientInput);
         this.graphicsEngine.render(this.mechanicEngine.gameObjects, fps);
     }
