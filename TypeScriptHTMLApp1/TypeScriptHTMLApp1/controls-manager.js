@@ -24,6 +24,7 @@ var ControlsManager = (function () {
     ControlsManager.prototype.reportInputs = function () {
         return this.inputsContainer.latestRightMouseClick;
     };
+    ControlsManager.prototype.kkk = function () { };
     return ControlsManager;
 })();
 var InputsContainer = (function () {

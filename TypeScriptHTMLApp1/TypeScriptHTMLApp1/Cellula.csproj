@@ -29,6 +29,7 @@
     <TypeScriptCompile Include="being.ts" />
     <TypeScriptCompile Include="cell.ts" />
     <TypeScriptCompile Include="controls-manager.ts" />
+    <TypeScriptCompile Include="factories\gameobject-factory.ts" />
     <TypeScriptCompile Include="food.ts" />
     <TypeScriptCompile Include="gameobject-data.ts" />
     <TypeScriptCompile Include="constants.ts" />

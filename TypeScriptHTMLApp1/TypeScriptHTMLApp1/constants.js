@@ -12,5 +12,10 @@ var BeingTypes;
     BeingTypes[BeingTypes["NPC"] = 1] = "NPC";
 })(BeingTypes || (BeingTypes = {}));
 ;
+var GameObjectTypes;
+(function (GameObjectTypes) {
+    GameObjectTypes[GameObjectTypes["FOOD"] = 0] = "FOOD";
+})(GameObjectTypes || (GameObjectTypes = {}));
+;
 var cellSize = 50;
 //# sourceMappingURL=constants.js.map

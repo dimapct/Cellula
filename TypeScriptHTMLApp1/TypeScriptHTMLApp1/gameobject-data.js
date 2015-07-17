@@ -40,4 +40,11 @@ var npcData = (function () {
     }
     return npcData;
 })();
+var foodData = (function () {
+    function foodData() {
+        this.gameType = "food";
+        this.position = new Point(200, 150);
+    }
+    return foodData;
+})();
 //# sourceMappingURL=gameobject-data.js.map

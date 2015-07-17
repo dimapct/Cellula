@@ -4,4 +4,7 @@
         super(data);
         this.energy = data.energy;
     }
+
+    update(t: number, clientEventData) {
+    }
 } 

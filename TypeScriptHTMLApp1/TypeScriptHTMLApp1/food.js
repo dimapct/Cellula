@@ -10,6 +10,8 @@ var Food = (function (_super) {
         _super.call(this, data);
         this.energy = data.energy;
     }
+    Food.prototype.update = function (t, clientEventData) {
+    };
     return Food;
 })(GameObject);
 //# sourceMappingURL=food.js.map

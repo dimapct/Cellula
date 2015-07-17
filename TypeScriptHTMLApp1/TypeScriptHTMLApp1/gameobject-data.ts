@@ -30,3 +30,8 @@ class npcData {
     rotationSpeed = 50;
     position = new Point(300, 200);
 }
+
+class foodData {
+    gameType = "food";
+    position = new Point(200, 150);
+}
