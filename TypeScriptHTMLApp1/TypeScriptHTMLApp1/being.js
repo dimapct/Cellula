@@ -29,9 +29,9 @@ var Being = (function (_super) {
             self.image.addChild(cell.image);
         });
     };
-    Being.prototype.update = function (t, clientEventData) {
+    Being.prototype.update = function (t, clientInputData) {
         this.move(t);
-        this.rotate(clientEventData.rotationInputs);
+        this.rotate(clientInputData);
     };
     Being.prototype.move = function (t) {
         if (this.moveTarget.x !== -1 && this.moveTarget.y !== -1) {
@@ -64,7 +64,10 @@ var Being = (function (_super) {
         this.lastMoveTarget = this.moveTarget;
         this.moveTarget = new Point(-1, -1);
     };
-    Being.prototype.rotate = function (rotationInputs) { };
+    Being.prototype.rotate = function (rotationInputs) {
+        this.image.rotation -= rotationInputs.leftRotationDuration / 1000 * this.rotationSpeed;
+        this.image.rotation += rotationInputs.rightRotationDuration / 1000 * this.rotationSpeed;
+    };
     return Being;
 })(GameObject);
 var PlayerBeing = (function (_super) {

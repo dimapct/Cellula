@@ -13,18 +13,16 @@
         this.gameObjects.push(this.player);
     }
 
-    update(t: number, clientEventData: Point) {
+    update(t: number, clientInputData) {
         this.gameObjects.forEach(function (obj) {
-            obj.update(t, clientEventData);
+            obj.update(t, clientInputData);
         });
 
-        if (clientEventData &&
-            (clientEventData.x !== this.player.moveTarget.x || clientEventData.y !== this.player.moveTarget.y) &&
-            (clientEventData.x !== this.player.lastMoveTarget.x || clientEventData.y !== this.player.lastMoveTarget.y)) {
-            this.player.moveTarget = clientEventData;
+        var goPoint = clientInputData.latestRightMouseClick;
+        if (goPoint &&
+            (goPoint.x !== this.player.moveTarget.x || goPoint.y !== this.player.moveTarget.y) &&
+            (goPoint.x !== this.player.lastMoveTarget.x || goPoint.y !== this.player.lastMoveTarget.y)) {
+            this.player.moveTarget = goPoint;
         }
-            
-        
-
     }
 }
