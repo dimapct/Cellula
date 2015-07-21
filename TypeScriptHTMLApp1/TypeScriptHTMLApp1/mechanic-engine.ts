@@ -1,10 +1,13 @@
 ﻿class MechanicEngine {
-    beingFactory: any = new BeingFactory();
+    cellFactory: CellFactory;
+    beingFactory: BeingFactory;
     gameObjectFactory: any = new GameObjectFactory();
     gameObjects: any[] = [];
     player: PlayerBeing;
 
     constructor() {
+        this.cellFactory = new CellFactory();
+        this.beingFactory = new BeingFactory(this.cellFactory);
         this.player = this.beingFactory.createBeing(BeingTypes.PLAYER, new playerData());
         var npc = this.beingFactory.createBeing(BeingTypes.NPC, new npcData());
         var food = this.gameObjectFactory.createGameObject(GameObjectTypes.FOOD, new foodData());
@@ -34,5 +37,10 @@
         }
     }
     //
-    createRandomCell() { }
+    createRandomCell() {
+        var cell = this.cellFactory.createCell(CellTypes.MUSCLE, new muscleData());
+        var point = this.player.getAvailableNeibPlaces()[1];
+        cell.coord = point;
+        this.player.addCell(cell);
+    }
 }

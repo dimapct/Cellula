@@ -1,7 +1,7 @@
 var BeingFactory = (function () {
-    function BeingFactory() {
-        this.cellFactory = new CellFactory();
+    function BeingFactory(cellFactory) {
         this.builders = [];
+        this.cellFactory = cellFactory;
         this.generateBuilders();
     }
     BeingFactory.prototype.createBeing = function (beingType, data) {
@@ -12,9 +12,6 @@ var BeingFactory = (function () {
         this.builders[BeingTypes.PLAYER] = function (data) {
             var core = self.cellFactory.createCell(CellTypes.CORE, new coreData());
             var being = new PlayerBeing(core, data);
-            //
-            console.log(being.gameType);
-            being.getAvailableNeibPlaces().forEach(function (neib) { return console.log('Point x: ' + neib.x + ', y: ' + neib.y); });
             return being;
         };
         this.builders[BeingTypes.NPC] = function (data) {

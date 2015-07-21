@@ -6,7 +6,7 @@
         this.generateBuilders();
     }
 
-    createCell(cellType, data) {
+    createCell(cellType, data): BaseCell {
         return this.builders[cellType](data);
     }
     

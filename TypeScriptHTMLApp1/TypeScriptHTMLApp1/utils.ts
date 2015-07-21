@@ -34,6 +34,10 @@ class Point {
         this.x = x;
         this.y = y;
     }
+
+    equals(otherPoint: Point): boolean {
+        return this.x === otherPoint.x && this.y === otherPoint.y;
+    }
 }
 
 class Rect extends createjs.Rectangle {

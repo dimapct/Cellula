@@ -1,10 +1,10 @@
 ﻿class BaseCell {
     image: any;
 
-    upNeib: Point;
-    downNeib: Point;
-    leftNeib: Point;
-    rightNeib: Point;
+    upNeib: BaseCell;
+    downNeib: BaseCell;
+    leftNeib: BaseCell;
+    rightNeib: BaseCell;
 
     coord: Point;
 

@@ -1,8 +1,9 @@
 var MechanicEngine = (function () {
     function MechanicEngine() {
-        this.beingFactory = new BeingFactory();
         this.gameObjectFactory = new GameObjectFactory();
         this.gameObjects = [];
+        this.cellFactory = new CellFactory();
+        this.beingFactory = new BeingFactory(this.cellFactory);
         this.player = this.beingFactory.createBeing(BeingTypes.PLAYER, new playerData());
         var npc = this.beingFactory.createBeing(BeingTypes.NPC, new npcData());
         var food = this.gameObjectFactory.createGameObject(GameObjectTypes.FOOD, new foodData());
@@ -28,7 +29,12 @@ var MechanicEngine = (function () {
         }
     };
     //
-    MechanicEngine.prototype.createRandomCell = function () { };
+    MechanicEngine.prototype.createRandomCell = function () {
+        var cell = this.cellFactory.createCell(CellTypes.MUSCLE, new muscleData());
+        var point = this.player.getAvailableNeibPlaces()[1];
+        cell.coord = point;
+        this.player.addCell(cell);
+    };
     return MechanicEngine;
 })();
 //# sourceMappingURL=mechanic-engine.js.map

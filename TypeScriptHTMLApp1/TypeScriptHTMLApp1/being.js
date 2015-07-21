@@ -13,8 +13,6 @@ var Being = (function (_super) {
         this.setupCoreCell(coreCell, data.position);
         this.moveTarget = new Point(-1, -1);
         this.lastMoveTarget = new Point(-1, -1);
-        //2
-        this.availableNeibPlaces = this.getAvailableNeibPlaces();
     }
     Being.prototype.setupCoreCell = function (coreCell, gamePosition) {
         this.coreCell = coreCell;
@@ -76,23 +74,45 @@ var Being = (function (_super) {
         var availableNeibPlaces = [];
         this.cells.forEach(function (cell) {
             if (cell.upNeib === undefined) {
-                availableNeibPlaces.push(new Point(cell.coord.x - 1, cell.coord.y));
-            }
-            if (cell.downNeib === undefined) {
-                availableNeibPlaces.push(new Point(cell.coord.x + 1, cell.coord.y));
-            }
-            if (cell.leftNeib === undefined) {
                 availableNeibPlaces.push(new Point(cell.coord.x, cell.coord.y - 1));
             }
-            if (cell.rightNeib === undefined) {
+            if (cell.downNeib === undefined) {
                 availableNeibPlaces.push(new Point(cell.coord.x, cell.coord.y + 1));
+            }
+            if (cell.leftNeib === undefined) {
+                availableNeibPlaces.push(new Point(cell.coord.x - 1, cell.coord.y));
+            }
+            if (cell.rightNeib === undefined) {
+                availableNeibPlaces.push(new Point(cell.coord.x + 1, cell.coord.y));
             }
         });
         return availableNeibPlaces;
     };
-    Being.prototype.addCell = function (cell, to) {
-        //ссылки на соседей у ячейки не обновляются
-        //this.availableNeibPlaces =
+    Being.prototype.addCell = function (newCell) {
+        this.cells.push(newCell);
+        this.cells.forEach(function (cell) {
+            if (cell.coord.equals(new Point(newCell.coord.x, newCell.coord.y + 1))) {
+                cell.upNeib = newCell;
+                newCell.downNeib = cell;
+            }
+            else if (cell.coord.equals(new Point(newCell.coord.x, newCell.coord.y - 1))) {
+                cell.downNeib = newCell;
+                newCell.upNeib = cell;
+            }
+            else if (cell.coord.equals(new Point(newCell.coord.x + 1, newCell.coord.y))) {
+                cell.leftNeib = newCell;
+                newCell.rightNeib = cell;
+            }
+            else if (cell.coord.equals(new Point(newCell.coord.x - 1, newCell.coord.y))) {
+                cell.rightNeib = newCell;
+                newCell.leftNeib = cell;
+            }
+        });
+        var x = newCell.coord.x * cellSize - cellSize / 2;
+        var y = newCell.coord.y * cellSize - cellSize / 2;
+        newCell.image.x = x;
+        newCell.image.y = y;
+        this.image.addChild(newCell.image);
     };
     return Being;
 })(GameObject);

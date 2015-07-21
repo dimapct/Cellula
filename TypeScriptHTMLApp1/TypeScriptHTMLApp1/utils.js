@@ -29,6 +29,9 @@ var Point = (function () {
         this.x = x;
         this.y = y;
     }
+    Point.prototype.equals = function (otherPoint) {
+        return this.x === otherPoint.x && this.y === otherPoint.y;
+    };
     return Point;
 })();
 var Rect = (function (_super) {
