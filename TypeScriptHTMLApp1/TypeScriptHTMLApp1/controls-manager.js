@@ -15,6 +15,7 @@ var ControlsManager = (function () {
         });
         window.onkeydown = function (e) {
             var storage = self.inputsContainer;
+            //console.log(e.keyCode);
             switch (e.keyCode) {
                 case 65:
                     if (storage.lastLeftKeyEvent === "keyDown") {
@@ -36,6 +37,11 @@ var ControlsManager = (function () {
                     else if (storage.lastRightKeyEvent === "keyUp") {
                         storage.rightKeyDown = new Date().getTime();
                         storage.lastRightKeyEvent = "keyDown";
+                    }
+                    break;
+                case 32:
+                    if (!storage.spaceDownAddCell) {
+                        storage.spaceDownAddCell = true;
                     }
                     break;
             }
@@ -78,7 +84,8 @@ var ControlsManager = (function () {
         report.latestRightMouseClick = storage.latestRightMouseClick;
         report.leftRotationDuration = storage.leftRotationDuration;
         report.rightRotationDuration = storage.rightRotationDuration;
-        storage.nullifyRotationDuration();
+        report.spaceDownAddCell = storage.spaceDownAddCell;
+        storage.nullify();
         return report;
     };
     return ControlsManager;
@@ -93,10 +100,12 @@ var InputsContainer = (function () {
         this.rightKeyDown = 0;
         //rightKeyUp: number = 0;
         this.lastRightKeyEvent = "keyUp";
+        this.spaceDownAddCell = false;
     }
-    InputsContainer.prototype.nullifyRotationDuration = function () {
+    InputsContainer.prototype.nullify = function () {
         this.leftRotationDuration = 0;
         this.rightRotationDuration = 0;
+        this.spaceDownAddCell = false;
     };
     return InputsContainer;
 })();
@@ -104,6 +113,7 @@ var ReportContainer = (function () {
     function ReportContainer() {
         this.leftRotationDuration = 0;
         this.rightRotationDuration = 0;
+        this.spaceDownAddCell = false;
     }
     return ReportContainer;
 })();

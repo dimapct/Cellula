@@ -13,6 +13,10 @@ var MechanicEngine = (function () {
         this.gameObjects.push(this.player);
     };
     MechanicEngine.prototype.update = function (t, clientInputData) {
+        //
+        if (clientInputData.spaceDownAddCell) {
+            this.createRandomCell();
+        }
         this.gameObjects.forEach(function (obj) {
             obj.update(t, clientInputData);
         });
@@ -23,6 +27,8 @@ var MechanicEngine = (function () {
             this.player.moveTarget = goPoint;
         }
     };
+    //
+    MechanicEngine.prototype.createRandomCell = function () { };
     return MechanicEngine;
 })();
 //# sourceMappingURL=mechanic-engine.js.map

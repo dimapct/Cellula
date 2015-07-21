@@ -1,6 +1,13 @@
 ﻿class BaseCell {
     image: any;
 
+    upNeib: Point;
+    downNeib: Point;
+    leftNeib: Point;
+    rightNeib: Point;
+
+    coord: Point;
+
     constructor(data: any) {
     } 
 }

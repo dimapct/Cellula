@@ -16,7 +16,12 @@
         this.gameObjects.push(this.player);
     }
 
-    update(t: number, clientInputData) {
+    update(t: number, clientInputData: ReportContainer) {
+        //
+        if (clientInputData.spaceDownAddCell) {
+            this.createRandomCell();
+        }
+
         this.gameObjects.forEach(function (obj) {
             obj.update(t, clientInputData);
         });
@@ -28,4 +33,6 @@
             this.player.moveTarget = goPoint;
         }
     }
+    //
+    createRandomCell() { }
 }

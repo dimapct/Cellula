@@ -13,6 +13,8 @@ var Being = (function (_super) {
         this.setupCoreCell(coreCell, data.position);
         this.moveTarget = new Point(-1, -1);
         this.lastMoveTarget = new Point(-1, -1);
+        //2
+        this.availableNeibPlaces = this.getAvailableNeibPlaces();
     }
     Being.prototype.setupCoreCell = function (coreCell, gamePosition) {
         this.coreCell = coreCell;
@@ -22,6 +24,7 @@ var Being = (function (_super) {
         this.cells.push(coreCell);
         this.image.addChild(this.coreCell.image);
     };
+    //?
     Being.prototype.onboardCells = function (cells) {
         var self = this;
         cells.forEach(function (cell) {
@@ -67,6 +70,29 @@ var Being = (function (_super) {
     Being.prototype.rotate = function (rotationInputs) {
         this.image.rotation -= rotationInputs.leftRotationDuration / 1000 * this.rotationSpeed;
         this.image.rotation += rotationInputs.rightRotationDuration / 1000 * this.rotationSpeed;
+    };
+    //
+    Being.prototype.getAvailableNeibPlaces = function () {
+        var availableNeibPlaces = [];
+        this.cells.forEach(function (cell) {
+            if (cell.upNeib === undefined) {
+                availableNeibPlaces.push(new Point(cell.coord.x - 1, cell.coord.y));
+            }
+            if (cell.downNeib === undefined) {
+                availableNeibPlaces.push(new Point(cell.coord.x + 1, cell.coord.y));
+            }
+            if (cell.leftNeib === undefined) {
+                availableNeibPlaces.push(new Point(cell.coord.x, cell.coord.y - 1));
+            }
+            if (cell.rightNeib === undefined) {
+                availableNeibPlaces.push(new Point(cell.coord.x, cell.coord.y + 1));
+            }
+        });
+        return availableNeibPlaces;
+    };
+    Being.prototype.addCell = function (cell, to) {
+        //ссылки на соседей у ячейки не обновляются
+        //this.availableNeibPlaces =
     };
     return Being;
 })(GameObject);

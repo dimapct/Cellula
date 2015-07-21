@@ -16,6 +16,10 @@
         this.builders[BeingTypes.PLAYER] = function (data: any) { 
             var core = self.cellFactory.createCell(CellTypes.CORE, new coreData());
             var being = new PlayerBeing(core, data);
+            //
+            console.log(being.gameType);
+            being.getAvailableNeibPlaces().forEach((neib) => console.log('Point x: ' + neib.x + ', y: ' + neib.y));
+
             return being;
         }
 

@@ -1,9 +1,12 @@
 ﻿class Being extends GameObject {
-    cells: any[];
+    //0
+    cells: BaseCell[];
     moveTarget: Point;
     lastMoveTarget: Point;
     coreCell: CoreCell;
     coreCellGameRect: createjs.Rectangle;
+    //1
+    availableNeibPlaces: Array<Point>;
 
     constructor(coreCell, data) {
         var self = this;
@@ -12,6 +15,8 @@
         this.setupCoreCell(coreCell, data.position);
         this.moveTarget = new Point(-1, -1);
         this.lastMoveTarget = new Point(-1, -1);
+        //2
+        this.availableNeibPlaces = this.getAvailableNeibPlaces();
     }
 
     setupCoreCell(coreCell, gamePosition) {
@@ -22,7 +27,7 @@
         this.cells.push(coreCell);
         this.image.addChild(this.coreCell.image);
     }
-
+    //?
     onboardCells(cells) {
         var self = this;
         cells.forEach(function (cell) {
@@ -77,6 +82,33 @@
     rotate(rotationInputs) { 
         this.image.rotation -= rotationInputs.leftRotationDuration / 1000 * this.rotationSpeed;
         this.image.rotation += rotationInputs.rightRotationDuration / 1000 * this.rotationSpeed;
+    }
+
+    //
+    getAvailableNeibPlaces(): Point[]{
+        var availableNeibPlaces: Array<Point> = [];
+        this.cells.forEach((cell) => {
+            if (cell.upNeib === undefined) {
+                availableNeibPlaces.push(new Point(cell.coord.x - 1, cell.coord.y));
+            }
+            if (cell.downNeib === undefined) {
+                availableNeibPlaces.push(new Point(cell.coord.x + 1, cell.coord.y));
+            }
+            if (cell.leftNeib === undefined) {
+                availableNeibPlaces.push(new Point(cell.coord.x, cell.coord.y - 1));
+            }
+            if (cell.rightNeib === undefined) {
+                availableNeibPlaces.push(new Point(cell.coord.x, cell.coord.y + 1));
+            }
+        });
+        
+        return availableNeibPlaces;
+    }
+
+    addCell(cell: BaseCell, to: Point) {
+        //ссылки на соседей у ячейки не обновляются
+
+        //this.availableNeibPlaces =
     }
 
 } 

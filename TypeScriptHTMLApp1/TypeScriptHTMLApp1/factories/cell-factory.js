@@ -10,6 +10,7 @@ var CellFactory = (function () {
         var self = this;
         this.builders[CellTypes.CORE] = function (data) {
             var cell = new CoreCell(data);
+            cell.coord = new Point(0, 0);
             cell.image = new createjs.Shape();
             var color = "black";
             cell.image.graphics.beginFill(color).drawRect(0, 0, cellSize, cellSize);

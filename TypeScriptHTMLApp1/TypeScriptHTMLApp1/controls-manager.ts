@@ -22,6 +22,7 @@
 
         window.onkeydown = function (e) {
             var storage = self.inputsContainer;
+            //console.log(e.keyCode);
             switch(e.keyCode) {
                 case 65: // left
                     if (storage.lastLeftKeyEvent === "keyDown") {
@@ -46,6 +47,12 @@
                     else if (storage.lastRightKeyEvent === "keyUp") {
                         storage.rightKeyDown = new Date().getTime();
                         storage.lastRightKeyEvent = "keyDown";
+                    }
+                    break;
+
+                case 32: // space
+                    if (!storage.spaceDownAddCell) {
+                        storage.spaceDownAddCell = true;
                     }
                     break;
             }
@@ -94,7 +101,8 @@
         report.latestRightMouseClick = storage.latestRightMouseClick;
         report.leftRotationDuration = storage.leftRotationDuration;
         report.rightRotationDuration = storage.rightRotationDuration;
-        storage.nullifyRotationDuration();
+        report.spaceDownAddCell = storage.spaceDownAddCell;
+        storage.nullify();
         return report;
     }
 
@@ -112,9 +120,12 @@ class InputsContainer {
     //rightKeyUp: number = 0;
     lastRightKeyEvent = "keyUp";
 
-    nullifyRotationDuration () {
+    spaceDownAddCell: boolean = false;
+
+    nullify () {
         this.leftRotationDuration = 0;
         this.rightRotationDuration = 0;
+        this.spaceDownAddCell = false;
     }
 }
 
@@ -122,4 +133,5 @@ class ReportContainer {
     latestRightMouseClick: Point;
     leftRotationDuration: number = 0;
     rightRotationDuration: number = 0;
+    spaceDownAddCell: boolean = false;
 }
