@@ -29,5 +29,45 @@
             cell.image.graphics.beginStroke("black").beginFill(color).drawRect(0, 0, cellSize, cellSize);
             return cell;
         };
+
+        this.builders[CellTypes.ENERGY] = function (data: any) {
+            var cell = new EnergyCell(data);
+            cell.image = new createjs.Shape();
+            var color = "yellow";
+            cell.image.graphics.beginStroke("black").beginFill(color).drawRect(0, 0, cellSize, cellSize);
+            return cell;
+        };
+
+        this.builders[CellTypes.TOXIC] = function (data: any) {
+            var cell = new ToxicCell(data);
+            cell.image = new createjs.Shape();
+            var color = "DeepPink";
+            cell.image.graphics.beginStroke("black").beginFill(color).drawRect(0, 0, cellSize, cellSize);
+            return cell;
+        };
+
+        this.builders[CellTypes.FAT] = function (data: any) {
+            var cell = new FatCell(data);
+            cell.image = new createjs.Shape();
+            var color = "Bisque";
+            cell.image.graphics.beginStroke("black").beginFill(color).drawRect(0, 0, cellSize, cellSize);
+            return cell;
+        };
+
+        this.builders[CellTypes.RECEPTOR] = function (data: any) {
+            var cell = new ReceptorCell(data);
+            cell.image = new createjs.Shape();
+            var color = "Indigo";
+            cell.image.graphics.beginStroke("black").beginFill(color).drawRect(0, 0, cellSize, cellSize);
+            return cell;
+        };
+
+        this.builders[CellTypes.BONE] = function (data: any) {
+            var cell = new BoneCell(data);
+            cell.image = new createjs.Shape();
+            var color = "DarkGray";
+            cell.image.graphics.beginStroke("black").beginFill(color).drawRect(0, 0, cellSize, cellSize);
+            return cell;
+        };
     }
 } 

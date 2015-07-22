@@ -1,14 +1,8 @@
-var muscleData = (function () {
-    function muscleData() {
-        this.gameType = "MuscleCell";
+var coreData = (function () {
+    function coreData() {
+        this.gameType = "CoreCell";
     }
-    return muscleData;
-})();
-var poisonData = (function () {
-    function poisonData() {
-        this.gameType = "PoisonCell";
-    }
-    return poisonData;
+    return coreData;
 })();
 var energyData = (function () {
     function energyData() {
@@ -16,11 +10,35 @@ var energyData = (function () {
     }
     return energyData;
 })();
-var coreData = (function () {
-    function coreData() {
-        this.gameType = "CoreCell";
+var muscleData = (function () {
+    function muscleData() {
+        this.gameType = "MuscleCell";
     }
-    return coreData;
+    return muscleData;
+})();
+var toxicData = (function () {
+    function toxicData() {
+        this.gameType = "ToxicCell";
+    }
+    return toxicData;
+})();
+var fatData = (function () {
+    function fatData() {
+        this.gameType = "FatCell";
+    }
+    return fatData;
+})();
+var receptorData = (function () {
+    function receptorData() {
+        this.gameType = "ReceptorCell";
+    }
+    return receptorData;
+})();
+var boneData = (function () {
+    function boneData() {
+        this.gameType = "BoneCell";
+    }
+    return boneData;
 })();
 var playerData = (function () {
     function playerData() {

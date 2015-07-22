@@ -30,8 +30,18 @@ var MechanicEngine = (function () {
     };
     //
     MechanicEngine.prototype.createRandomCell = function () {
-        var cell = this.cellFactory.createCell(CellTypes.MUSCLE, new muscleData());
-        var point = this.player.getAvailableNeibPlaces()[1];
+        // Get random cellType from enum CellTypes
+        var keys = Object.keys(CellTypes);
+        keys = keys.slice(keys.length / 2);
+        var cellType = CellTypes.CORE;
+        while (cellType == CellTypes.CORE) {
+            var index = Math.floor(Math.random() * keys.length);
+            cellType = CellTypes[keys[index]];
+        }
+        var cell = this.cellFactory.createCell(cellType, new muscleData());
+        // Get random AvailableNeibPlace
+        var availableNeibPlaces = this.player.getAvailableNeibPlaces();
+        var point = availableNeibPlaces[Math.floor(Math.random() * availableNeibPlaces.length)];
         cell.coord = point;
         this.player.addCell(cell);
     };

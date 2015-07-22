@@ -1,17 +1,29 @@
-﻿class muscleData {
-    gameType = "MuscleCell";
-}
-
-class poisonData {
-    gameType = "PoisonCell";
+﻿class coreData {
+    gameType = "CoreCell";
 }
 
 class energyData {
     gameType = "EnergyCell";
 }
 
-class coreData {
-    gameType = "CoreCell";
+class muscleData {
+    gameType = "MuscleCell";
+}
+
+class toxicData {
+    gameType = "ToxicCell";
+}
+
+class fatData {
+    gameType = "FatCell";
+}
+
+class receptorData {
+    gameType = "ReceptorCell";
+}
+
+class boneData {
+    gameType = "BoneCell";
 }
 
 class playerData {

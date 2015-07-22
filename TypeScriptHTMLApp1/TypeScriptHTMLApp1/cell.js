@@ -9,6 +9,13 @@ var BaseCell = (function () {
     }
     return BaseCell;
 })();
+var CoreCell = (function (_super) {
+    __extends(CoreCell, _super);
+    function CoreCell(data) {
+        _super.call(this, data);
+    }
+    return CoreCell;
+})(BaseCell);
 var EnergyCell = (function (_super) {
     __extends(EnergyCell, _super);
     function EnergyCell(data) {
@@ -23,18 +30,32 @@ var MuscleCell = (function (_super) {
     }
     return MuscleCell;
 })(BaseCell);
-var PoisonCell = (function (_super) {
-    __extends(PoisonCell, _super);
-    function PoisonCell(data) {
+var ToxicCell = (function (_super) {
+    __extends(ToxicCell, _super);
+    function ToxicCell(data) {
         _super.call(this, data);
     }
-    return PoisonCell;
+    return ToxicCell;
 })(BaseCell);
-var CoreCell = (function (_super) {
-    __extends(CoreCell, _super);
-    function CoreCell(data) {
+var FatCell = (function (_super) {
+    __extends(FatCell, _super);
+    function FatCell(data) {
         _super.call(this, data);
     }
-    return CoreCell;
+    return FatCell;
+})(BaseCell);
+var ReceptorCell = (function (_super) {
+    __extends(ReceptorCell, _super);
+    function ReceptorCell(data) {
+        _super.call(this, data);
+    }
+    return ReceptorCell;
+})(BaseCell);
+var BoneCell = (function (_super) {
+    __extends(BoneCell, _super);
+    function BoneCell(data) {
+        _super.call(this, data);
+    }
+    return BoneCell;
 })(BaseCell);
 //# sourceMappingURL=cell.js.map

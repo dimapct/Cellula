@@ -1,9 +1,12 @@
 var CellTypes;
 (function (CellTypes) {
-    CellTypes[CellTypes["MUSCLE"] = 0] = "MUSCLE";
-    CellTypes[CellTypes["ENERGY"] = 1] = "ENERGY";
-    CellTypes[CellTypes["POISON"] = 2] = "POISON";
-    CellTypes[CellTypes["CORE"] = 3] = "CORE";
+    CellTypes[CellTypes["CORE"] = 0] = "CORE";
+    CellTypes[CellTypes["MUSCLE"] = 1] = "MUSCLE";
+    CellTypes[CellTypes["ENERGY"] = 2] = "ENERGY";
+    CellTypes[CellTypes["TOXIC"] = 3] = "TOXIC";
+    CellTypes[CellTypes["FAT"] = 4] = "FAT";
+    CellTypes[CellTypes["RECEPTOR"] = 5] = "RECEPTOR";
+    CellTypes[CellTypes["BONE"] = 6] = "BONE";
 })(CellTypes || (CellTypes = {}));
 ;
 var BeingTypes;

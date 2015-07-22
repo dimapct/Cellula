@@ -12,6 +12,10 @@
     } 
 }
 
+class CoreCell extends BaseCell {
+    constructor(data: any) { super(data); }
+}
+
 class EnergyCell extends BaseCell {
     constructor(data: any) { super(data); }
 }
@@ -20,10 +24,18 @@ class MuscleCell extends BaseCell {
     constructor(data: any) { super(data); }
 }
 
-class PoisonCell extends BaseCell {
+class ToxicCell extends BaseCell {
     constructor(data: any) { super(data); }
 }
 
-class CoreCell extends BaseCell {
+class FatCell extends BaseCell {
+    constructor(data: any) { super(data); }
+}
+
+class ReceptorCell extends BaseCell {
+    constructor(data: any) { super(data); }
+}
+
+class BoneCell extends BaseCell {
     constructor(data: any) { super(data); }
 }
