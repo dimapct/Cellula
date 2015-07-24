@@ -6,11 +6,9 @@
 
     constructor() {
         this.mechanicEngine = new MechanicEngine();
-        var canvas: any = document.getElementById("gameCanvas");
-        //canvas.style = "border:40px inset blue;"
-        canvas.width = $(window).width() - 200;
-        canvas.height = $(window).height() - 200;
-        this.graphicsEngine = new GraphicsEngine(canvas, this.mechanicEngine.player);
+        var gameCanvas = document.getElementById("gameCanvas");
+        var cellMenuCanvas = document.getElementById("cellMenuCanvas");
+        this.graphicsEngine = new GraphicsEngine(gameCanvas, cellMenuCanvas, this.mechanicEngine.player);
         this.controlsManager = new ControlsManager();
         this.lastUpdateTime = 0;
     }

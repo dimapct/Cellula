@@ -1,18 +1,29 @@
 /// <reference path="lib\easeljs.d.ts" />
 var GraphicsEngine = (function () {
-    function GraphicsEngine(canvas, player) {
+    function GraphicsEngine(gameCanvas, cellMenuCanvas, player) {
         this.currentZoom = 1;
         this.rulerOn = false;
-        this.setPlayer(player, canvas);
-        this.stage = new createjs.Stage(canvas);
-        this.s1 = new createjs.Shape();
-        this.s1.graphics.beginFill("black").drawRect(0, canvas.height / 2, canvas.width, 1);
-        this.s2 = new createjs.Shape();
-        this.s2.graphics.beginFill("black").drawRect(canvas.width / 2, 0, 1, canvas.height);
+        this.cellMenuCanvasWidth = 200;
+        this.setGameCanvasProps(gameCanvas);
+        this.setCellMenuCanvasProps(cellMenuCanvas);
+        this.setPlayer(player, this.gameCanvas);
+        this.stage = new createjs.Stage(this.gameCanvas);
         this.menu = new Menu();
-        this.menu.createRuler(canvas);
-        this.fpsPoint = new Point(canvas.width - 60, canvas.height - 20);
+        this.menu.createRuler(this.gameCanvas);
+        this.fpsPoint = new Point(this.gameCanvas.width - 60, this.gameCanvas.height - 20);
     }
+    GraphicsEngine.prototype.setGameCanvasProps = function (gameCanvas) {
+        this.gameCanvas = gameCanvas;
+        this.gameCanvas.style = "border:1px solid blue;";
+        this.gameCanvas.width = $(window).width() - this.cellMenuCanvasWidth;
+        this.gameCanvas.height = $(window).height();
+    };
+    GraphicsEngine.prototype.setCellMenuCanvasProps = function (cellMenuCanvas) {
+        this.cellMenuCanvas = cellMenuCanvas;
+        this.cellMenuCanvas.style = "border:1px solid blue;";
+        this.cellMenuCanvas.width = this.cellMenuCanvasWidth;
+        this.cellMenuCanvas.height = $(window).height();
+    };
     GraphicsEngine.prototype.render = function (objects, fps) {
         this.updateCanvasPosition(objects);
         this.syncStage(objects);
@@ -21,20 +32,12 @@ var GraphicsEngine = (function () {
     };
     GraphicsEngine.prototype.setPlayer = function (player, canvas) {
         this.player = player;
-        //this.player.image.x = canvas.width / 2;
-        //this.player.image.y = canvas.height / 2;
     };
     GraphicsEngine.prototype.updateCanvasPosition = function (objects) {
         var self = this;
         objects.forEach(function (object) {
             object.image.x = object.gameRect.center.x;
             object.image.y = object.gameRect.center.y;
-            //if (object.gameType !== 'yy') {
-            //    var dx = self.player.gameRect.center.x - object.gameRect.center.x;
-            //    var dy = self.player.gameRect.center.y - object.gameRect.center.y;
-            //    object.image.x = self.player.image.x - dx;
-            //    object.image.y = self.player.image.y - dy;
-            //}
         });
     };
     GraphicsEngine.prototype.syncStage = function (objects) {
@@ -44,7 +47,6 @@ var GraphicsEngine = (function () {
             stage.addChild(obj.image);
         });
         stage.addChild(this.menu.fpsText);
-        stage.addChild(this.s1, this.s2);
         if (this.rulerOn) {
             stage.addChild(this.menu.ruler);
         }
