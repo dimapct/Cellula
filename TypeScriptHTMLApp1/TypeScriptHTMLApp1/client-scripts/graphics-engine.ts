@@ -3,23 +3,22 @@
 class GraphicsEngine {
     stage: createjs.Stage;
     menu: Menu;
+    cellMenu: CellMenu;
     fpsPoint: Point;
     currentZoom = 1;
-    rulerOn = false;
     player: PlayerBeing;
     gameCanvas: any;
     cellMenuCanvas: any;
     cellMenuCanvasWidth: number = 200;
 
-    
-    constructor(gameCanvas, cellMenuCanvas, player) {
+    constructor(gameCanvas, cellMenuCanvas, player, cellFactory: CellFactory) {
         this.setGameCanvasProps(gameCanvas);
         this.setCellMenuCanvasProps(cellMenuCanvas);
         this.setPlayer(player, this.gameCanvas);
         this.stage = new createjs.Stage(this.gameCanvas);
         this.menu = new Menu();
-        this.menu.createRuler(this.gameCanvas);
-        this.fpsPoint = new Point(this.gameCanvas.width - 60, this.gameCanvas.height - 20);
+        this.cellMenu = new CellMenu(this.cellMenuCanvas, cellFactory);
+        this.fpsPoint = new Point(this.gameCanvas.width - 60, this.gameCanvas.height - 60);
     }
 
     setGameCanvasProps(gameCanvas) {
@@ -34,13 +33,21 @@ class GraphicsEngine {
         this.cellMenuCanvas.style = "border:1px solid blue;"
         this.cellMenuCanvas.width = this.cellMenuCanvasWidth;
         this.cellMenuCanvas.height = $(window).height();
+        this.cellMenuCanvas.style.position = "absolute";
+        this.cellMenuCanvas.style.left = $(window).width() - this.cellMenuCanvasWidth;
     }
 
-    render(objects, fps) {
+    update(objects, fps) {
         this.updateCanvasPosition(objects);
         this.syncStage(objects);
         this.menu.update(fps, this.fpsPoint);
+        this.cellMenu.update();
+    }
+
+    render(objects, fps) {
+        this.update(objects, fps);
         this.stage.update();
+        this.cellMenu.stage.update();
     }
 
     setPlayer(player, canvas) {
@@ -62,9 +69,6 @@ class GraphicsEngine {
             stage.addChild(obj.image);
         });
         stage.addChild(this.menu.fpsText);
-        if (this.rulerOn) {
-            stage.addChild(this.menu.ruler)
-        }
     }
 
 } 

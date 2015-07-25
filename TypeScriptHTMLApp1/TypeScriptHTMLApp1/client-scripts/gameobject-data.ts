@@ -28,7 +28,7 @@ class boneData {
 
 class playerData {
     gameType = "player";
-    speed = 50;
+    speed = 90;
     rotationSpeed = 50;
     position = new Point(100, 100);
     //canvas = document.getElementById("gameCanvas")
@@ -38,7 +38,7 @@ class playerData {
 
 class npcData {
     gameType = "npc";
-    speed = 10;
+    speed = 20;
     rotationSpeed = 50;
     position = new Point(300, 200);
 }

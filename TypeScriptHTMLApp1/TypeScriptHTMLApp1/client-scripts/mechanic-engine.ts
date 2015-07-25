@@ -4,8 +4,10 @@
     gameObjectFactory: any = new GameObjectFactory();
     gameObjects: any[] = [];
     player: PlayerBeing;
+    cellsAvailableForPlayer: number[];
 
     constructor() {
+        this.cellsAvailableForPlayer = this.getAvailableCellsForPlayer();
         this.cellFactory = new CellFactory();
         this.beingFactory = new BeingFactory(this.cellFactory);
         this.player = this.beingFactory.createBeing(BeingTypes.PLAYER, new playerData());
@@ -19,8 +21,18 @@
         this.gameObjects.push(this.player);
     }
 
+    getAvailableCellsForPlayer() {
+        var availableCells = [];
+        var keys = Object.keys(CellTypes);
+        availableCells = keys.slice(1, keys.length / 2);
+        return availableCells;
+    }
+
     update(t: number, clientInputData: ReportContainer) {
-        //
+        if (!(clientInputData.menuSelection === "")) {
+            console.log(clientInputData.menuSelection);
+        }
+
         if (clientInputData.spaceDownAddCell) {
             this.createRandomCell();
         }
@@ -36,9 +48,8 @@
             this.player.moveTarget = goPoint;
         }
     }
-    //
+    
     createRandomCell() {
-
         // Get random cellType from enum CellTypes
         var keys = Object.keys(CellTypes);
         keys = keys.slice(keys.length / 2);

@@ -8,14 +8,15 @@
         this.mechanicEngine = new MechanicEngine();
         var gameCanvas = document.getElementById("gameCanvas");
         var cellMenuCanvas = document.getElementById("cellMenuCanvas");
-        this.graphicsEngine = new GraphicsEngine(gameCanvas, cellMenuCanvas, this.mechanicEngine.player);
-        this.controlsManager = new ControlsManager();
+        this.graphicsEngine = new GraphicsEngine(gameCanvas, cellMenuCanvas, this.mechanicEngine.player, this.mechanicEngine.cellFactory);
+        this.controlsManager = new ControlsManager(this.graphicsEngine.stage, this.graphicsEngine.cellMenu.stage);
         this.lastUpdateTime = 0;
     }
 
     run() {
         console.log("Start game run")
         this.mechanicEngine.createStartObjects();
+        this.graphicsEngine.cellMenu.createCellsInfo(this.mechanicEngine.cellsAvailableForPlayer);
         createjs.Ticker.interval = 16;
         createjs.Ticker.addEventListener("tick", this.update);
     }

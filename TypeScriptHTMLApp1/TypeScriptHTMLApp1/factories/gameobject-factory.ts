@@ -17,7 +17,6 @@
             gameObject.image = new createjs.Shape();
             var color = "pink";
             gameObject.image.graphics.beginFill(color).drawRect(0, 0, cellSize, cellSize);
-            gameObject.image.graphics.beginFill("orange").drawCircle(cellSize / 2, cellSize / 2, cellSize / 4);
             return gameObject;
         };
     }

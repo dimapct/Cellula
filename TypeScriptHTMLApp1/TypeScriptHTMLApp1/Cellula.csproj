@@ -44,6 +44,7 @@
     <TypeScriptCompile Include="lib\tweenjs.d.ts" />
     <TypeScriptCompile Include="client-scripts\map.ts" />
     <TypeScriptCompile Include="client-scripts\mechanic-engine.ts" />
+    <TypeScriptCompile Include="menus\cell-menu.ts" />
     <TypeScriptCompile Include="menus\menu.ts" />
     <TypeScriptCompile Include="client-scripts\npc.ts" />
     <TypeScriptCompile Include="client-scripts\utils.ts" />
