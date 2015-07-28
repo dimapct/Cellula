@@ -12,7 +12,6 @@
         this.setupCoreCell(coreCell, data.position);
         this.moveTarget = new Point(-1, -1);
         this.lastMoveTarget = new Point(-1, -1);
-        this.availableCellPlaces = [];
     }
 
     setupCoreCell(coreCell, gamePosition) {
