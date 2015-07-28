@@ -2,23 +2,21 @@
     gameStage: createjs.Stage;
     cellMenuStage: createjs.Stage;
     inputsContainer: InputsContainer;
+    gameStageLeftMouseClickHandlers: { (x: number, y: number) }[];
+    cellMenuStageClickHandlers: {(x: number, y: number) }[];
 
     constructor(gameStage: createjs.Stage, cellMenuStage: createjs.Stage) {
         this.gameStage = gameStage;
         this.cellMenuStage = cellMenuStage;
         this.inputsContainer = new InputsContainer();
+        this.gameStageLeftMouseClickHandlers = [];
+        this.cellMenuStageClickHandlers = [];
         this.setInputHandlers();
     }
 
     setInputHandlers() {
         var self = this;
         document.oncontextmenu = function () { return false };
-        self.gameStage.addEventListener("stagemousedown", function (e: createjs.MouseEvent) {
-            if (e.nativeEvent.button === 2) {
-                self.inputsContainer.latestRightMouseClick = new Point(e.stageX, e.stageY);
-            }
-            return false;
-        }); 
         window.onkeydown = function (e) {
             var storage = self.inputsContainer;
             //console.log(e.keyCode);
@@ -48,11 +46,10 @@
                         storage.lastRightKeyEvent = "keyDown";
                     }
                     break;
-
-                case 32: // space
-                    if (!storage.spaceDownAddCell) {
-                        storage.spaceDownAddCell = true;
-                    }
+                    case 32: // space
+                        if (!storage.spaceDownAddCell) {
+                            storage.spaceDownAddCell = true;
+                        }
                     break;
             }
             
@@ -82,17 +79,21 @@
 
             return false;
         }
-
-        self.cellMenuStage.addEventListener("stagemousedown", function (e: createjs.MouseEvent) {
-            if (e.nativeEvent.button === 0) {
-                var lineContainer = self.cellMenuStage.getObjectUnderPoint(e.stageX, e.stageY, 0);
-                self.inputsContainer.menuSelection = lineContainer.name;
+        self.gameStage.addEventListener("stagemousedown", function (e: createjs.MouseEvent) {
+            if (e.nativeEvent.button === 2) {
+                self.inputsContainer.latestRightMouseClick = new Point(e.stageX, e.stageY);
+            }
+            else if (e.nativeEvent.button === 0) {
+                self.gameStageLeftMouseClickHandlers.forEach(function (item) { item(e.stageX, e.stageY) });
             }
             return false;
         }); 
-
-
-
+        self.cellMenuStage.addEventListener("stagemousedown", function (e: createjs.MouseEvent) {
+            if (e.nativeEvent.button === 0) {
+                self.cellMenuStageClickHandlers.forEach(function (handler) { handler(e.stageX, e.stageY); });
+            }
+            return false;
+        }); 
     }
 
     reportInputs() {
@@ -109,40 +110,38 @@
         }
         var report = new ReportContainer();
         report.latestRightMouseClick = storage.latestRightMouseClick;
+        report.latestLeftMouseClick = storage.latestLeftMouseClick;
         report.leftRotationDuration = storage.leftRotationDuration;
         report.rightRotationDuration = storage.rightRotationDuration;
         report.spaceDownAddCell = storage.spaceDownAddCell;
-        report.menuSelection = storage.menuSelection;
         storage.nullify();
         return report;
     }
-
 }
 
 
 class InputsContainer {
     latestRightMouseClick: Point;
+    latestLeftMouseClick: Point;
     leftRotationDuration: number = 0;
     rightRotationDuration: number = 0;
     leftKeyDown: number = 0;
     lastLeftKeyEvent = "keyUp";
     rightKeyDown: number = 0;
     lastRightKeyEvent = "keyUp";
-    menuSelection = "";
-    spaceDownAddCell: boolean = false;
+    spaceDownAddCell = false;
 
     nullify () {
         this.leftRotationDuration = 0;
         this.rightRotationDuration = 0;
         this.spaceDownAddCell = false;
-        this.menuSelection = "";
     }
 }
 
 class ReportContainer {
     latestRightMouseClick: Point;
+    latestLeftMouseClick: Point;
     leftRotationDuration = 0;
     rightRotationDuration = 0;
     spaceDownAddCell = false;
-    menuSelection = "";
 }

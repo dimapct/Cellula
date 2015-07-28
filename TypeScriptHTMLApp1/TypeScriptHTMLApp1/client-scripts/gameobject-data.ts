@@ -1,29 +1,29 @@
 ﻿class coreData {
-    gameType = "CoreCell";
+    gameType = CellTypes["CORE"];
 }
 
 class energyData {
-    gameType = "EnergyCell";
+    gameType = CellTypes["ENERGY"];
 }
 
 class muscleData {
-    gameType = "MuscleCell";
+    gameType = CellTypes["MUSCLE"];
 }
 
 class toxicData {
-    gameType = "ToxicCell";
+    gameType = CellTypes["TOXIC"];
 }
 
 class fatData {
-    gameType = "FatCell";
+    gameType = CellTypes["FAT"];
 }
 
 class receptorData {
-    gameType = "ReceptorCell";
+    gameType = CellTypes["RECEPTOR"];
 }
 
 class boneData {
-    gameType = "BoneCell";
+    gameType = CellTypes["BONE"];
 }
 
 class playerData {

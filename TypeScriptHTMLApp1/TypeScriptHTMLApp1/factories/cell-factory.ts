@@ -6,7 +6,7 @@
         this.generateBuilders();
     }
 
-    createCell(cellType, data): BaseCell {
+    createCell(cellType, data) {
         return this.builders[cellType](data);
     }
     
@@ -69,5 +69,15 @@
             cell.image.graphics.beginStroke("black").beginFill(color).drawRect(0, 0, cellSize, cellSize);
             return cell;
         };
+
+        this.builders[ServiceObjects.FAKECELL] = function (data: any) {
+            var fakeCell = new FakeCell(new Object());
+            fakeCell.image = new createjs.Shape();
+            fakeCell.image.graphics.beginStroke("black").beginFill("lightgray").drawRect(0, 0, cellSize, cellSize);
+            fakeCell.image.alpha = 0.3;
+            fakeCell.image.name = "fakeeeeee";
+            return fakeCell;
+        };
+
     }
 } 

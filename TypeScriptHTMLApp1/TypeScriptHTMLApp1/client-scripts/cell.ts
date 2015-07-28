@@ -1,6 +1,7 @@
 ﻿class BaseCell {
     image: any;
-    gameType: string;
+    id: number;
+    gameType: number;
     upNeib: BaseCell;
     downNeib: BaseCell;
     leftNeib: BaseCell;
@@ -15,48 +16,60 @@
 class CoreCell extends BaseCell {
     constructor(data: any) {
         super(data);
-        this.gameType = "Core";
+        this.gameType = CellTypes["CORE"];
     }
 }
 
 class EnergyCell extends BaseCell {
     constructor(data: any) {
         super(data);
-        this.gameType = "Energy";
+        this.gameType = CellTypes["ENERGY"];
     }
 }
 
 class MuscleCell extends BaseCell {
     constructor(data: any) {
         super(data);
-        this.gameType = "Muscle";
+        this.gameType = CellTypes["MUSCLE"];
     }
 }
 
 class ToxicCell extends BaseCell {
     constructor(data: any) {
         super(data);
-        this.gameType = "Toxic";
+        this.gameType = CellTypes["TOXIC"];
     }
 }
 
 class FatCell extends BaseCell {
     constructor(data: any) {
         super(data);
-        this.gameType = "Fat";
+        this.gameType = CellTypes["FAT"];
     }
 }
 
 class ReceptorCell extends BaseCell {
     constructor(data: any) {
         super(data);
-        this.gameType = "Receptor";
+        this.gameType = CellTypes["RECEPTOR"];
     }
 }
 
 class BoneCell extends BaseCell {
     constructor(data: any) {
         super(data);
-        this.gameType = "Bone";
+        this.gameType = CellTypes["BONE"];
+    }
+}
+
+class FakeCell extends BaseCell {
+    parentCallback: {(coord: Point)};
+    constructor(data: any) {
+        super(data);
+        this.gameType = CellTypes["FAKE"];
+    }
+
+    mouseDownHandler = () => {
+        this.parentCallback(this.coord);
     }
 }

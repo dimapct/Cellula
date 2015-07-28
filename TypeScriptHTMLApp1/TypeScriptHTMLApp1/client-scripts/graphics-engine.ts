@@ -21,6 +21,10 @@ class GraphicsEngine {
         this.fpsPoint = new Point(this.gameCanvas.width - 60, this.gameCanvas.height - 60);
     }
 
+    init(controlsManager: ControlsManager) {
+        this.cellMenu.init(controlsManager);
+    }
+
     setGameCanvasProps(gameCanvas) {
         this.gameCanvas = gameCanvas;
         this.gameCanvas.style = "border:1px solid blue;"
@@ -37,11 +41,41 @@ class GraphicsEngine {
         this.cellMenuCanvas.style.left = $(window).width() - this.cellMenuCanvasWidth;
     }
 
+    subscribeToEvents(mechanicEngine: MechanicEngine) {
+        this.cellMenu.onCellAddStart.add(this.cellAddStartHandler);
+        mechanicEngine.onCellAddEnd.add(this.cellAddEndHandler);
+    }
+
+    cellAddStartHandler = (cell: BaseCell) => {
+        this.stage.addChild(cell.image);
+        this.stage.addEventListener("mouseleave", this.cellMenu.stageLeaveHandler);
+        this.stage.addEventListener("mouseenter", this.cellMenu.stageEnterHandler);
+    }
+
+    cellAddEndHandler = (cell: BaseCell) => {
+        this.stage.removeEventListener("mouseleave", this.cellMenu.stageLeaveHandler);
+        this.stage.removeEventListener("mouseenter", this.cellMenu.stageEnterHandler);
+        cell.image.visible = false;
+        this.stage.removeChild(cell.image);
+    }
+
+
+
     update(objects, fps) {
         this.updateCanvasPosition(objects);
         this.syncStage(objects);
         this.menu.update(fps, this.fpsPoint);
-        this.cellMenu.update();
+
+        if (this.stage.mouseInBounds) {
+            var x = this.stage.mouseX;
+            var y = this.stage.mouseY;
+        }
+        else {
+            var x = -1000;
+            var y = -1000;
+        }
+
+        this.cellMenu.update(new Point(x, y), this.player.image.rotation);
     }
 
     render(objects, fps) {
@@ -64,7 +98,7 @@ class GraphicsEngine {
 
     syncStage(objects) {
         var stage = this.stage;
-        stage.removeAllChildren();
+        //stage.removeAllChildren();
         objects.forEach(function (obj) {
             stage.addChild(obj.image);
         });

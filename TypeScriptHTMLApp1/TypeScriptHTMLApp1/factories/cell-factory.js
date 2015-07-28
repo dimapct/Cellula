@@ -59,6 +59,14 @@ var CellFactory = (function () {
             cell.image.graphics.beginStroke("black").beginFill(color).drawRect(0, 0, cellSize, cellSize);
             return cell;
         };
+        this.builders[ServiceObjects.FAKECELL] = function (data) {
+            var fakeCell = new FakeCell(new Object());
+            fakeCell.image = new createjs.Shape();
+            fakeCell.image.graphics.beginStroke("black").beginFill("lightgray").drawRect(0, 0, cellSize, cellSize);
+            fakeCell.image.alpha = 0.3;
+            fakeCell.image.name = "fakeeeeee";
+            return fakeCell;
+        };
     };
     return CellFactory;
 })();

@@ -1,5 +1,4 @@
 ﻿class Being extends GameObject {
-    //0
     cells: BaseCell[];
     moveTarget: Point;
     lastMoveTarget: Point;
@@ -13,6 +12,7 @@
         this.setupCoreCell(coreCell, data.position);
         this.moveTarget = new Point(-1, -1);
         this.lastMoveTarget = new Point(-1, -1);
+        this.availableCellPlaces = [];
     }
 
     setupCoreCell(coreCell, gamePosition) {
@@ -23,15 +23,7 @@
         this.cells.push(coreCell);
         this.image.addChild(this.coreCell.image);
     }
-    //?
-    onboardCells(cells) {
-        var self = this;
-        cells.forEach(function (cell) {
-            self.cells.push(cell);
-            self.image.addChild(cell.image);
-        });
-    }
-
+    
     update(t: number, clientInputData) {
         this.move(t);
         this.rotate(clientInputData);
@@ -80,7 +72,6 @@
         this.image.rotation += rotationInputs.rightRotationDuration / 1000 * this.rotationSpeed;
     }
 
-    //
     getAvailableNeibPlaces(): Point[]{
         var availableNeibPlaces: Array<Point> = [];
         this.cells.forEach((cell) => {
@@ -121,11 +112,15 @@
                 newCell.leftNeib = cell;
             }
         });
+        this.setNewCellPosition(newCell);
+        this.image.addChild(newCell.image);
+    }
+
+    setNewCellPosition(newCell) {
         var x = newCell.coord.x * cellSize - cellSize / 2;
         var y = newCell.coord.y * cellSize - cellSize / 2;
         newCell.image.x = x;
         newCell.image.y = y;
-        this.image.addChild(newCell.image);
     }
 } 
 

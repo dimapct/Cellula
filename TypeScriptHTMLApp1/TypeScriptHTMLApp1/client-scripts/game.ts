@@ -13,10 +13,18 @@
         this.lastUpdateTime = 0;
     }
 
+    init() {
+        this.graphicsEngine.init(this.controlsManager);
+        this.graphicsEngine.cellMenu.createCellMenu(this.mechanicEngine.cellsAvailableForPlayer);
+        //this.mechanicEngine.init(this.controlsManager);
+        this.mechanicEngine.subscribeToEvents(this.graphicsEngine);
+        this.graphicsEngine.subscribeToEvents(this.mechanicEngine);
+    }
+
     run() {
         console.log("Start game run")
-        this.mechanicEngine.createStartObjects();
-        this.graphicsEngine.cellMenu.createCellsInfo(this.mechanicEngine.cellsAvailableForPlayer);
+        this.init();
+        this.mechanicEngine.createWorld();
         createjs.Ticker.interval = 16;
         createjs.Ticker.addEventListener("tick", this.update);
     }
