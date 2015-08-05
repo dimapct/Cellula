@@ -26,6 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="client-scripts\application.ts" />
+    <TypeScriptCompile Include="client-scripts\tissue.ts" />
     <TypeScriptCompile Include="factories\being-factory.ts" />
     <TypeScriptCompile Include="client-scripts\being.ts" />
     <TypeScriptCompile Include="client-scripts\cell.ts" />

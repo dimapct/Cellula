@@ -51,7 +51,7 @@
         // re-create cell 
         this.selectedCell = this.cellFactory.createCell(this.selectedCell.gameType, new Object());
         this.selectedCell.coord = selectedPlace;
-        this.player.addCell(this.selectedCell);
+        this.player.addNewCell(this.selectedCell);
         this.cellAdditionInProcess = false;
     }
 
@@ -122,6 +122,6 @@
         var point = availableNeibPlaces[Math.floor(Math.random() * availableNeibPlaces.length)];
 
         cell.coord = point;
-        this.player.addCell(cell);
+        this.player.addNewCell(cell);
     }
 }

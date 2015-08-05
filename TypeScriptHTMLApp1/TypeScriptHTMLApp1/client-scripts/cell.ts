@@ -1,7 +1,9 @@
 ﻿class BaseCell {
+    parentTissue: Tissue;
     image: any;
     id: number;
     gameType: number;
+    neigbours: BaseCell[];
     upNeib: BaseCell;
     downNeib: BaseCell;
     leftNeib: BaseCell;
@@ -10,6 +12,7 @@
     coord: Point;
 
     constructor(data: any) {
+        //this.neigbours.push(this.leftNeib, this.rightNeib, this.upNeib, this.downNeib);
     } 
 }
 

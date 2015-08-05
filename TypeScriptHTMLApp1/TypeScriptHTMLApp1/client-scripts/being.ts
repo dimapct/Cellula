@@ -1,28 +1,94 @@
 ﻿class Being extends GameObject {
-    cells: BaseCell[];
+    tissues: Tissue[];
+
+    //cells: BaseCell[];
     moveTarget: Point;
     lastMoveTarget: Point;
-    coreCell: CoreCell;
+    //coreCell: CoreCell;
     coreCellGameRect: createjs.Rectangle;
 
     constructor(coreCell, data) {
-        var self = this;
         super(data);
-        this.cells = [];
+        this.tissues = [];
+        //this.cells = [];
         this.setupCoreCell(coreCell, data.position);
         this.moveTarget = new Point(-1, -1);
         this.lastMoveTarget = new Point(-1, -1);
     }
 
-    setupCoreCell(coreCell, gamePosition) {
-        this.coreCell = coreCell;
-        this.coreCellGameRect = new createjs.Rectangle(gamePosition.x - cellSize / 2, gamePosition.y - cellSize / 2, cellSize, cellSize);
-        this.coreCell.image.x = -cellSize / 2;
-        this.coreCell.image.y = -cellSize / 2;
-        this.cells.push(coreCell);
-        this.image.addChild(this.coreCell.image);
+    setupCoreCell(coreCell: BaseCell, gamePosition: Point) {
+        //this.coreCellGameRect = new createjs.Rectangle(gamePosition.x - cellSize / 2, gamePosition.y - cellSize / 2, cellSize, cellSize);
+        coreCell.image.x = -cellSize / 2;
+        coreCell.image.y = -cellSize / 2;
+
+        //this.cells.push(coreCell);
+        this.image.addChild(coreCell.image);
+        var tissue = new Tissue(coreCell);
+        coreCell.parentTissue = tissue;
+        tissue.shootingCells.push(coreCell);
+        this.tissues.push(tissue);
     }
-    
+
+    addNewCell(cell: BaseCell) {
+        var tissue = new Tissue(cell);
+
+        this.updateNeigbours(cell);
+        var tissues: Tissue[] = this.getSameTypeNeigbourTissues(cell);
+
+        tissues.forEach(function (tis: Tissue) {
+            tissue.cells = tissue.cells.concat(tis.cells);
+        });
+
+        this.updateTissueShootingCells(tissue);
+        this.setNewCellPosition(cell);
+        this.image.addChild(cell.image);
+    }
+
+    updateTissueShootingCells(tissue: Tissue) {
+        var shootingCells = [];
+        tissue.cells.forEach(function (cell) {
+            if (!cell.upNeib || !cell.downNeib || !cell.leftNeib || !cell.rightNeib) {
+                shootingCells.push(cell);
+            }
+        });
+        tissue.shootingCells = shootingCells;
+    }
+
+    updateNeigbours(newCell: BaseCell) {
+        this.tissues.forEach(function (tissue) {
+            tissue.cells.forEach((cell) => {
+                if (cell.coord.equals(new Point(newCell.coord.x, newCell.coord.y + 1))) {
+                    cell.upNeib = newCell;
+                    newCell.downNeib = cell;
+                }
+                else if (cell.coord.equals(new Point(newCell.coord.x, newCell.coord.y - 1))) {
+                    cell.downNeib = newCell;
+                    newCell.upNeib = cell;
+                }
+                else if (cell.coord.equals(new Point(newCell.coord.x + 1, newCell.coord.y))) {
+                    cell.leftNeib = newCell;
+                    newCell.rightNeib = cell;
+                }
+                else if (cell.coord.equals(new Point(newCell.coord.x - 1, newCell.coord.y))) {
+                    cell.rightNeib = newCell;
+                    newCell.leftNeib = cell;
+                }
+            });
+        });
+        
+    }
+
+    getSameTypeNeigbourTissues(cell: BaseCell) {
+        var tissues = [];
+        var neigbours = [cell.downNeib, cell.leftNeib, cell.rightNeib, cell.upNeib];
+        neigbours.forEach(function (neigb) {
+            if (neigb.gameType === cell.gameType && tissues.indexOf(neigb.parentTissue) === -1) {
+                tissues.push(neigb.parentTissue);
+            }
+        });
+        return tissues;
+    }
+
     update(t: number, clientInputData) {
         this.move(t);
         this.rotate(clientInputData);
@@ -72,48 +138,49 @@
     }
 
     getAvailableNeibPlaces(): Point[]{
-        var availableNeibPlaces: Array<Point> = [];
-        this.cells.forEach((cell) => {
-            if (cell.upNeib === undefined) {
-                availableNeibPlaces.push(new Point(cell.coord.x, cell.coord.y - 1));
-            }
-            if (cell.downNeib === undefined) {
-                availableNeibPlaces.push(new Point(cell.coord.x, cell.coord.y + 1));
-            }
-            if (cell.leftNeib === undefined) {
-                availableNeibPlaces.push(new Point(cell.coord.x - 1, cell.coord.y));
-            }
-            if (cell.rightNeib === undefined) {
-                availableNeibPlaces.push(new Point(cell.coord.x + 1, cell.coord.y));
-            }
+        var availableNeibPlaces: Point[] = [];
+        this.tissues.forEach(function (tissue) {
+            tissue.cells.forEach((cell) => {
+                if (cell.upNeib === undefined) {
+                    availableNeibPlaces.push(new Point(cell.coord.x, cell.coord.y - 1));
+                }
+                if (cell.downNeib === undefined) {
+                    availableNeibPlaces.push(new Point(cell.coord.x, cell.coord.y + 1));
+                }
+                if (cell.leftNeib === undefined) {
+                    availableNeibPlaces.push(new Point(cell.coord.x - 1, cell.coord.y));
+                }
+                if (cell.rightNeib === undefined) {
+                    availableNeibPlaces.push(new Point(cell.coord.x + 1, cell.coord.y));
+                }
+            });
         });
-        
         return availableNeibPlaces;
     }
 
-    addCell(newCell: BaseCell) {
-        this.cells.push(newCell);
-        this.cells.forEach((cell) => {
-            if (cell.coord.equals(new Point(newCell.coord.x, newCell.coord.y + 1))){
-                cell.upNeib = newCell;
-                newCell.downNeib = cell;
-            }
-            else if (cell.coord.equals(new Point(newCell.coord.x, newCell.coord.y - 1))){
-                cell.downNeib = newCell;
-                newCell.upNeib = cell;
-            }
-            else if (cell.coord.equals(new Point(newCell.coord.x + 1, newCell.coord.y))){
-                cell.leftNeib = newCell;
-                newCell.rightNeib = cell;
-            }
-            else if (cell.coord.equals(new Point(newCell.coord.x - 1, newCell.coord.y))){
-                cell.rightNeib = newCell;
-                newCell.leftNeib = cell;
-            }
-        });
-        this.setNewCellPosition(newCell);
-        this.image.addChild(newCell.image);
-    }
+    //addCell(newCell: BaseCell) {
+    //    this.cells.push(newCell);
+    //    this.cells.forEach((cell) => {
+    //        if (cell.coord.equals(new Point(newCell.coord.x, newCell.coord.y + 1))){
+    //            cell.upNeib = newCell;
+    //            newCell.downNeib = cell;
+    //        }
+    //        else if (cell.coord.equals(new Point(newCell.coord.x, newCell.coord.y - 1))){
+    //            cell.downNeib = newCell;
+    //            newCell.upNeib = cell;
+    //        }
+    //        else if (cell.coord.equals(new Point(newCell.coord.x + 1, newCell.coord.y))){
+    //            cell.leftNeib = newCell;
+    //            newCell.rightNeib = cell;
+    //        }
+    //        else if (cell.coord.equals(new Point(newCell.coord.x - 1, newCell.coord.y))){
+    //            cell.rightNeib = newCell;
+    //            newCell.leftNeib = cell;
+    //        }
+    //    });
+    //    this.setNewCellPosition(newCell);
+    //    this.image.addChild(newCell.image);
+    //}
 
     setNewCellPosition(newCell) {
         var x = newCell.coord.x * cellSize - cellSize / 2;
