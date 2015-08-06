@@ -10,10 +10,15 @@
     rightNeib: BaseCell;
 
     coord: Point;
+    selectTissueParentHandler: {(tissue: Tissue): void};
 
     constructor(data: any) {
         //this.neigbours.push(this.leftNeib, this.rightNeib, this.upNeib, this.downNeib);
     } 
+    leftMouseClickHandler = () => {
+        this.selectTissueParentHandler(this.parentTissue)
+    }
+
 }
 
 class CoreCell extends BaseCell {

@@ -1,27 +1,22 @@
 ﻿class Being extends GameObject {
     tissues: Tissue[];
-
-    //cells: BaseCell[];
     moveTarget: Point;
     lastMoveTarget: Point;
-    //coreCell: CoreCell;
     coreCellGameRect: createjs.Rectangle;
+    activeTissues: Tissue[];
 
     constructor(coreCell, data) {
         super(data);
         this.tissues = [];
-        //this.cells = [];
+        this.activeTissues = [];
         this.setupCoreCell(coreCell, data.position);
         this.moveTarget = new Point(-1, -1);
         this.lastMoveTarget = new Point(-1, -1);
     }
 
     setupCoreCell(coreCell: BaseCell, gamePosition: Point) {
-        //this.coreCellGameRect = new createjs.Rectangle(gamePosition.x - cellSize / 2, gamePosition.y - cellSize / 2, cellSize, cellSize);
         coreCell.image.x = -cellSize / 2;
         coreCell.image.y = -cellSize / 2;
-
-        //this.cells.push(coreCell);
         this.image.addChild(coreCell.image);
         var tissue = new Tissue(coreCell);
         coreCell.parentTissue = tissue;
@@ -29,13 +24,41 @@
         this.tissues.push(tissue);
     }
 
+    selectTissueHandler = (selectedTissue: Tissue) => {
+        var self = this;
+        // Remove previous tissue selection
+        self.activeTissues.forEach((tissue) => {
+            tissue.cells.forEach((cell) => {
+                cell.image.filters = [];
+                cell.image.updateCache();
+            });
+        });
+
+        self.activeTissues = [];
+        selectedTissue.cells.forEach(function (cell) {
+            cell.image.filters = [new createjs.ColorFilter(1, 1, 1, 0.5, 0, 0, 0, 0)];
+            cell.image.updateCache();
+        });
+        self.activeTissues.push(selectedTissue);
+    }
+
     addNewCell(cell: BaseCell) {
         var self = this;
         var tissue = new Tissue(cell);
 
+        cell.selectTissueParentHandler = this.selectTissueHandler;
+        cell.image.addEventListener("mousedown", cell.leftMouseClickHandler);
+
+
         this.updateNeigbours(cell);
         var oldTissues: Tissue[] = this.getSameTypeNeigbourTissues(cell);
 
+
+        oldTissues.forEach(function (tis: Tissue) {
+            tis.cells.forEach((cell) => {
+                cell.parentTissue = tissue;
+            })
+        });
         oldTissues.forEach(function (tis: Tissue) {
             tissue.cells = tissue.cells.concat(tis.cells);
         });
@@ -43,11 +66,13 @@
         this.updateTissueShootingCells(tissue);
         this.setNewCellPosition(cell);
         this.image.addChild(cell.image);
+        // Remove old tissues
         oldTissues.forEach(function (oldTissue) { 
             self.tissues = self.tissues.filter(function (t) { return t.id !== oldTissue.id });
         });
 
         this.tissues.push(tissue);
+
     }
 
     updateTissueShootingCells(tissue: Tissue) {
