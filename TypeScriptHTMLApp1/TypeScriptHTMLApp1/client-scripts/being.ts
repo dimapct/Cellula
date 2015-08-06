@@ -33,8 +33,10 @@
                 cell.image.updateCache();
             });
         });
-
+        // Remove previous selected tissues 
         self.activeTissues = [];
+
+        // Highlight cells of selected tissue
         selectedTissue.cells.forEach(function (cell) {
             cell.image.filters = [new createjs.ColorFilter(1, 1, 1, 0.5, 0, 0, 0, 0)];
             cell.image.updateCache();
