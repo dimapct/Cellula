@@ -30,18 +30,24 @@
     }
 
     addNewCell(cell: BaseCell) {
+        var self = this;
         var tissue = new Tissue(cell);
 
         this.updateNeigbours(cell);
-        var tissues: Tissue[] = this.getSameTypeNeigbourTissues(cell);
+        var oldTissues: Tissue[] = this.getSameTypeNeigbourTissues(cell);
 
-        tissues.forEach(function (tis: Tissue) {
+        oldTissues.forEach(function (tis: Tissue) {
             tissue.cells = tissue.cells.concat(tis.cells);
         });
 
         this.updateTissueShootingCells(tissue);
         this.setNewCellPosition(cell);
         this.image.addChild(cell.image);
+        oldTissues.forEach(function (oldTissue) { 
+            self.tissues = self.tissues.filter(function (t) { return t.id !== oldTissue.id });
+        });
+
+        this.tissues.push(tissue);
     }
 
     updateTissueShootingCells(tissue: Tissue) {
@@ -82,7 +88,7 @@
         var tissues = [];
         var neigbours = [cell.downNeib, cell.leftNeib, cell.rightNeib, cell.upNeib];
         neigbours.forEach(function (neigb) {
-            if (neigb.gameType === cell.gameType && tissues.indexOf(neigb.parentTissue) === -1) {
+            if (neigb && neigb.gameType === cell.gameType && tissues.indexOf(neigb.parentTissue) === -1) {
                 tissues.push(neigb.parentTissue);
             }
         });
