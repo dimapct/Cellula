@@ -3,19 +3,13 @@
 
 interface IWeapon {
     hit(cells: BaseCell[], damage: number);
-
 }
 
 class MuscleWeapon implements IWeapon {
     hit(cells: BaseCell[], damage: number) {
-        if (cells.length > 0) {
-            var being = cells[0].parentTissue.parentBeing;
-            var self = this;
-            var damagePerCell = cells.length > 0 ? damage / cells.length : 0;
-            cells.forEach((cell) => { self.hitCell(cell, damagePerCell) });
-
-            being.cells.forEach((cell) => { cell.image.alpha = cell.hp / cell.hpMax });
-        }
+        var self = this;
+        var damagePerCell = cells.length > 0 ? damage / cells.length : 0;
+        cells.forEach((cell) => { self.hitCell(cell, damagePerCell) });
     }
 
     private hitCell(cell: BaseCell, damage: number) {
@@ -58,11 +52,8 @@ class EnergyWeapon implements IWeapon {
                     else cell.hp = 0;
                 }
             });
-            being.cells.forEach((cell) => { cell.image.alpha = cell.hp / cell.hpMax; console.log(CellTypes[cell.gameType], cell.hpMax, cell.hp, cell.image.alpha) });
         }
     }
-
-    
 }
 
 class ToxicWeapon implements IWeapon {

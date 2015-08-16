@@ -64,6 +64,9 @@
     update() {
         this.gameRect.center = this.image.localToGlobal(this.size / 2, this.size / 2);
         this.checkIsAlive();
+
+        // Animation of hp left
+        this.image.alpha = this.hp / this.hpMax;
     }
 
     checkIsAlive() { if (this.hp <= 0) this.isAlive = false }
