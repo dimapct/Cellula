@@ -1,7 +1,9 @@
 ﻿class NPC extends Being {
-    constructor(coreCell, data) {
-        super(coreCell, data);
+    constructor(coreCell, data, mechanicEngine: MechanicEngine) {
+        super(coreCell, data, mechanicEngine);
     }
+    //update(t: number, clientInputData?) {
+    //}
 
 
 

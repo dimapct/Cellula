@@ -1,6 +1,7 @@
 ﻿class MechanicEngine {
     cellFactory: CellFactory;
     beingFactory: BeingFactory;
+    bulletFactory: BulletFactory;
     gameObjectFactory: GameObjectFactory;
     gameObjects: any[] = [];
     player: PlayerBeing;
@@ -16,18 +17,30 @@
         this.cellsAvailableForPlayer = this.getAvailableCellsForPlayer();
         this.cellFactory = new CellFactory();
         this.gameObjectFactory = new GameObjectFactory();
+        this.bulletFactory = new BulletFactory();
         this.onCellAddEnd = new cellula.Event<BaseCell>();
         this.fakeCells = [];
         this.beingFactory = new BeingFactory(this.cellFactory);
-        this.player = this.beingFactory.createBeing(BeingTypes.PLAYER, new playerData());
-        var npc = this.beingFactory.createBeing(BeingTypes.NPC, new npcData());
-        var food = this.gameObjectFactory.createGameObject(GameObjectTypes.FOOD, new foodData());
-        this.gameObjects.push(npc);
-        this.gameObjects.push(food);
+        this.player = this.beingFactory.createBeing(BeingTypes.PLAYER, new PlayerData(), this);
+    }
+
+    init(controlsManager: ControlsManager) {
+        controlsManager.spaceButtonHandlers.push(this.playerShoot);
     }
 
     createWorld() {
         this.createStartObjects();
+    }
+    createStartObjects() {
+        var npc = this.beingFactory.createBeing(BeingTypes.NPC, new NPCData(), this);
+        //var food = this.gameObjectFactory.createGameObject(GameObjectTypes.FOOD, new FoodData());
+        this.gameObjects.push(this.player);
+        this.gameObjects.push(npc);
+        //this.gameObjects.push(food);
+    }
+
+    playerShoot = () => {
+        this.player.shoot();
     }
 
     subscribeToEvents(graphicsEngine: GraphicsEngine) {
@@ -49,17 +62,12 @@
         this.onCellAddEnd.trigger(this.selectedCell);
         this.removeAvailablePlacesCells();
         // re-create cell 
-        this.selectedCell = this.cellFactory.createCell(this.selectedCell.gameType, new Object());
+        this.selectedCell = this.cellFactory.createCell(this.selectedCell.gameType, CellDataTypes[this.selectedCell.gameType]);
         this.selectedCell.coord = selectedPlace;
         this.player.addNewCell(this.selectedCell);
         this.cellAdditionInProcess = false;
     }
 
-   
-
-    createStartObjects() {
-        this.gameObjects.push(this.player);
-    }
 
     getAvailableCellsForPlayer() {
         var availableCells = [];
@@ -70,7 +78,8 @@
 
     update(t: number, clientInputData: ReportContainer) {
         if (clientInputData.spaceDownAddCell) {
-            this.createRandomCell();
+            var npc = this.gameObjects.filter(function (go) { return go instanceof NPC })[0];
+            this.createRandomCell(npc);
         }
 
         this.gameObjects.forEach(function (obj) {
@@ -83,13 +92,14 @@
             (goPoint.x !== this.player.lastMoveTarget.x || goPoint.y !== this.player.lastMoveTarget.y)) {
             this.player.moveTarget = goPoint;
         }
+        this.removeDead();
     }
 
     createAvailablePlacesCells() {
         var self = this;
         var availableNeibPlaces = this.player.getAvailableNeibPlaces();
         availableNeibPlaces.forEach(function (point) {
-            var fakeCell: FakeCell = self.cellFactory.createCell(ServiceObjects.FAKECELL, new Object());
+            var fakeCell: FakeCell = self.cellFactory.createCell(ServiceObjects.FAKECELL, new FakeData());
             fakeCell.coord = point;
             fakeCell.parentCallback = self.cellAddEndHandler;
             fakeCell.image.addEventListener("mousedown", fakeCell.mouseDownHandler);
@@ -105,7 +115,7 @@
         this.fakeCells = [];
     }
     
-    createRandomCell() {
+    createRandomCell(being: Being) {
         // Get random cellType from enum CellTypes
         var keys = Object.keys(CellTypes);
         keys = keys.slice(keys.length / 2);
@@ -115,13 +125,17 @@
             cellType = CellTypes[keys[index]];
         }
 
-        var cell = this.cellFactory.createCell(cellType, new Object());
+        var cell = this.cellFactory.createCell(cellType, CellDataTypes[cellType]);
 
         // Get random AvailableNeibPlace
-        var availableNeibPlaces = this.player.getAvailableNeibPlaces();
+        var availableNeibPlaces = being.getAvailableNeibPlaces();
         var point = availableNeibPlaces[Math.floor(Math.random() * availableNeibPlaces.length)];
 
         cell.coord = point;
-        this.player.addNewCell(cell);
+        being.addNewCell(cell);
+    }
+
+    removeDead() {
+        this.gameObjects = this.gameObjects.filter(function (gameObject) { return gameObject.isAlive; });
     }
 }

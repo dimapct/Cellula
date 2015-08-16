@@ -16,13 +16,13 @@
     init() {
         this.graphicsEngine.init(this.controlsManager);
         this.graphicsEngine.cellMenu.createCellMenu(this.mechanicEngine.cellsAvailableForPlayer);
-        //this.mechanicEngine.init(this.controlsManager);
+        this.mechanicEngine.init(this.controlsManager);
         this.mechanicEngine.subscribeToEvents(this.graphicsEngine);
         this.graphicsEngine.subscribeToEvents(this.mechanicEngine);
     }
 
     run() {
-        console.log("Start game run")
+        console.log("Start game run");
         this.init();
         this.mechanicEngine.createWorld();
         createjs.Ticker.interval = 16;

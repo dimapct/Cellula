@@ -26,11 +26,14 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="client-scripts\application.ts" />
+    <TypeScriptCompile Include="client-scripts\bullet.ts" />
     <TypeScriptCompile Include="client-scripts\tissue.ts" />
     <TypeScriptCompile Include="factories\being-factory.ts" />
     <TypeScriptCompile Include="client-scripts\being.ts" />
     <TypeScriptCompile Include="client-scripts\cell.ts" />
     <TypeScriptCompile Include="client-scripts\controls-manager.ts" />
+    <TypeScriptCompile Include="factories\bullet-factory.ts" />
+    <TypeScriptCompile Include="client-scripts\weapons.ts" />
     <TypeScriptCompile Include="factories\gameobject-factory.ts" />
     <TypeScriptCompile Include="client-scripts\food.ts" />
     <TypeScriptCompile Include="client-scripts\gameobject-data.ts" />

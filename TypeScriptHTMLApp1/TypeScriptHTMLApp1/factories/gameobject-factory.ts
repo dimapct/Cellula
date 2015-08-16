@@ -16,7 +16,7 @@
             var gameObject = new Food(data);
             gameObject.image = new createjs.Shape();
             var color = "pink";
-            gameObject.image.graphics.beginFill(color).drawRect(0, 0, cellSize, cellSize);
+            gameObject.image.graphics.beginFill(color).drawRect(0, 0, data.size, data.size);
             return gameObject;
         };
     }

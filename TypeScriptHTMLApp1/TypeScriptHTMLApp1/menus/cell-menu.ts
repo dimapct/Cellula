@@ -22,10 +22,11 @@
 
     cellMenuStageClickHandler = (x: number, y: number) => {
         var lineContainer = this.stage.getObjectUnderPoint(x, y, 0);
+        
         if (lineContainer) { 
-            var selectedCell = this.cellFactory.createCell(lineContainer.id, new Object());
-            selectedCell.image.regX = cellSize / 2;
-            selectedCell.image.regY = cellSize / 2;
+            var selectedCell = this.cellFactory.createCell(lineContainer.id, CellDataTypes[lineContainer.id]);
+            selectedCell.image.regX = selectedCell.gameRect.width / 2;
+            selectedCell.image.regY = selectedCell.gameRect.height / 2;
             this.onCellAddStart.trigger(selectedCell);
             this.selectedCell = selectedCell;
         }
@@ -56,15 +57,15 @@
     createCellMenu(cells: number[]) {
         var textX = this.startPoint.x + 30;
         var y = this.startPoint.y;
-
-        var scaleFactor = this.cellTargetSize / cellSize;
+        var tempData = new BaseCellData();
+        var scaleFactor = this.cellTargetSize / tempData.size;
 
         for (var i = 0; i < cells.length; i++) {
             var lineContainer = new createjs.Container();
             var fillShape = new createjs.Shape();
             fillShape.graphics.beginFill("white").drawRect(0, 0, 300, this.lineHeight);
             var cellType = cells[i];
-            var cell = this.cellFactory.createCell(cellType, new Object());
+            var cell = this.cellFactory.createCell(cellType, tempData);
             cell.image.scaleX = scaleFactor;
             cell.image.scaleY = scaleFactor;
             var text = new createjs.Text(CellTypes[cell.gameType], this.cellNameTextSize + "px Arial", this.cellNameTextColor);
@@ -75,7 +76,9 @@
             y += this.lineHeight;
             fillShape.id = cell.gameType;
             cell.image.id = cell.gameType;
+            cell.image.children.forEach((c) => { c.id = cell.gameType});
             text.id = cell.gameType;
+            lineContainer.id = cell.gameType;
             lineContainer.addChild(fillShape, cell.image, text);
             this.stage.addChild(lineContainer);
         }

@@ -8,22 +8,23 @@
         this.generateBuilders();
     }
 
-    createBeing(beingType, data) {
-        return this.builders[beingType](data);
+    createBeing(beingType, data, mechanicEngine: MechanicEngine) {
+        return this.builders[beingType](data, mechanicEngine);
     }
 
     generateBuilders() {
         var self = this;
-        this.builders[BeingTypes.PLAYER] = function (data: any) { 
-            var core = self.cellFactory.createCell(CellTypes.CORE, new coreData());
-            var being = new PlayerBeing(core, data);
+        this.builders[BeingTypes.PLAYER] = function (data: any, mechanicEngine: MechanicEngine) { 
+            var core = self.cellFactory.createCell(CellTypes.CORE, CellDataTypes[CellTypes.CORE]);
+            var being = new PlayerBeing(core, data, mechanicEngine);
             return being;
         }
 
-        this.builders[BeingTypes.NPC] = function (data: any) {
-            var core = self.cellFactory.createCell(CellTypes.CORE, new coreData());
-            core.image.graphics.beginFill("green").drawCircle(cellSize / 2, cellSize / 2, cellSize / 4);
-            var being = new PlayerBeing(core, data);
+        this.builders[BeingTypes.NPC] = function (data: any, mechanicEngine: MechanicEngine) {
+            var core = self.cellFactory.createCell(CellTypes.CORE, CellDataTypes[CellTypes.CORE]);
+            var image = new createjs.Shape();
+            core.image.addChild(image);
+            var being = new NPC(core, data, mechanicEngine);
             return being;
         }
     }

@@ -3,7 +3,8 @@
     cellMenuStage: createjs.Stage;
     inputsContainer: InputsContainer;
     gameStageLeftMouseClickHandlers: { (x: number, y: number) }[];
-    cellMenuStageClickHandlers: {(x: number, y: number) }[];
+    cellMenuStageClickHandlers: { (x: number, y: number) }[];
+    spaceButtonHandlers: {()}[];
 
     constructor(gameStage: createjs.Stage, cellMenuStage: createjs.Stage) {
         this.gameStage = gameStage;
@@ -11,6 +12,7 @@
         this.inputsContainer = new InputsContainer();
         this.gameStageLeftMouseClickHandlers = [];
         this.cellMenuStageClickHandlers = [];
+        this.spaceButtonHandlers = [];
         this.setInputHandlers();
     }
 
@@ -46,10 +48,13 @@
                         storage.lastRightKeyEvent = "keyDown";
                     }
                     break;
-                    case 32: // space
-                        if (!storage.spaceDownAddCell) {
-                            storage.spaceDownAddCell = true;
-                        }
+                case 17:  // left cntrl
+                    if (!storage.spaceDownAddCell) {
+                        storage.spaceDownAddCell = true;
+                    }
+                    break;
+                case 32: // space
+                    self.spaceButtonHandlers.forEach((v) => { v(); });
                     break;
             }
             

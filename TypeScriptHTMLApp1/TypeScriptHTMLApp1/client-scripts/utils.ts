@@ -26,17 +26,13 @@
     }
 }
 
-class Point {
-    x: number;
-    y: number;
-
+class Point extends createjs.Point {
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
     }
 
-    equals(otherPoint: Point): boolean {
-        return this.x === otherPoint.x && this.y === otherPoint.y;
+    static equals(onePoint: Point, otherPoint: Point): boolean {
+        return onePoint.x === otherPoint.x && onePoint.y === otherPoint.y;
     }
 }
 
