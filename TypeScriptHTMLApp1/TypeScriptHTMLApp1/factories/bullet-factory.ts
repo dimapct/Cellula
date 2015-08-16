@@ -13,6 +13,7 @@
     generateBuilders() {
         this.builders[CellTypes.CORE] = function (mechanicEngine, parentBeing, position, damageSize, damage) {
             var bullet = new Bullet(mechanicEngine, parentBeing, position, damageSize, damage);
+            bullet.setWeapon(new CoreWeapon());
             return bullet;
         };
 

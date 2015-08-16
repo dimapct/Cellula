@@ -9,7 +9,7 @@
     isAlive: boolean;
     creationTime: number;
     mechanicEngine: MechanicEngine;
-    weapon: BaseWeapon;
+    weapon: IWeapon;
 
     constructor(mechanicEngine: MechanicEngine, parent: Being, position: Point, size: number, damage: number, lifeDuration: number = 0) {
         this.mechanicEngine = mechanicEngine;
@@ -21,7 +21,6 @@
         this.lifeDuration = lifeDuration;
         this.isAlive = true;
         this.creationTime = new Date().getTime();
-
     }
 
     update() {
@@ -34,7 +33,7 @@
         this.weapon.hit(hitCells, this.damage);
     }
 
-    setWeapon(weapon: BaseWeapon) {
+    setWeapon(weapon: IWeapon) {
         this.weapon = weapon;
     }
 

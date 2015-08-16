@@ -66,7 +66,7 @@
         this.checkIsAlive();
     }
 
-    checkIsAlive() { if(this.hp <= 0) this.isAlive = false }
+    checkIsAlive() { if (this.hp <= 0) this.isAlive = false }
 }
 
 class CoreCell extends BaseCell {
@@ -102,6 +102,7 @@ class FatCell extends BaseCell {
         super(data);
         this.gameType = CellTypes["FAT"];
     }
+    shoot(mechanicEngine: MechanicEngine, damage: number, stage) { }
 }
 
 class ReceptorCell extends BaseCell {
@@ -109,6 +110,7 @@ class ReceptorCell extends BaseCell {
         super(data);
         this.gameType = CellTypes["RECEPTOR"];
     }
+    shoot(mechanicEngine: MechanicEngine, damage: number, stage) { }
 }
 
 class BoneCell extends BaseCell {
@@ -116,6 +118,7 @@ class BoneCell extends BaseCell {
         super(data);
         this.gameType = CellTypes["BONE"];
     }
+    shoot(mechanicEngine: MechanicEngine, damage: number, stage) { }
 }
 
 class FakeCell extends BaseCell {
